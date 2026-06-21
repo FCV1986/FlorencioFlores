@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Florencio Flores - Tienda de Semillas y Plantas</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+    <style>
+        body { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .contenedor { display: flex; gap: 20px; }
+        .catalogo { flex: 3; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; }
+        .producto-card { border: 1px solid #ccc; padding: 15px; border-radius: 8px; text-align: center; }
+        .producto-card img { max-width: 100%; height: auto; border-radius: 4px; }
+        .carrito-seccion { flex: 1; border-left: 2px solid #ccc; padding-left: 20px; position: sticky; top: 20px; height: fit-content; }
+        .filtros { margin-bottom: 20px; display: flex; gap: 10px; flex-wrap: wrap; }
+        .btn-filtro { cursor: pointer; }
+        .item-carrito { display: flex; justify-content: space-between; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>🌱 Florencio Flores</h1>
+        <p>Catálogo oficial de semillas, plantas y bulbos de temporada.</p>
+    </header>
+
+    <div class="filtros">
+        <button class="btn-filtro" onclick="filtrarProductos('todos')">Todos</button>
+        <button class="btn-filtro" onclick="filtrarProductos('sobres-hortalizas')">Sobres Hortalizas</button>
+        <button class="btn-filtro" onclick="filtrarProductos('bulbos-temporada')">Bulbos de Temporada</button>
+        <button class="btn-filtro" onclick="filtrarProductos('frutos-rojos')">Frutos Rojos</button>
+        <button class="btn-filtro" onclick="filtrarProductos('plantas-varias')">Plantas y Otras</button>
+    </div>
+
+    <div class="contenedor">
+        <main class="catalogo" id="grid-productos"></main>
+
+        <aside class="carrito-seccion">
+            <h2>🛒 Tu Pedido</h2>
+            <div id="items-carrito">
+                <p>El carrito está vacío.</p>
+            </div>
+            <hr>
+            <h3>Total: $<span id="total-precio">0</span></h3>
+            <button style="background-color: #25D366; color: white; width: 100%; font-weight: bold;" onclick="enviarWhatsApp()">
+                Confirmar Pedido por WhatsApp
+            </button>
+        </aside>
+    </div>
+
+    <script src="productos.js"></script>
+    <script>
+        let carrito = [];
+        const WHATSAPP_DANIELA = "56912345678"; // ⚠️ REEMPLAZAR con el número real de Daniela (sin el +)
+
+        // Renderizar productos en pantalla
+        function mostrarProductos(lista) {
+            const grid = document.getElementById('grid-productos');
+            grid.innerHTML = '';
+            lista.forEach(p => {
+                grid.innerHTML += `
+                    <div class="producto-card">
+                        <img src="${p.imagen}" alt="${p.nombre}">
+                        <h4>${p.nombre}</h4>
+                        <p><strong>$${p.precio.toLocaleString('es-CL')}</strong></p>
+                        <button onclick="agregarAlCarrito(${p.id})">Agregar</button>
+                    </div>
+                `;
+            });
+        }
+
+        // Filtrar categorías
+        function filtrarProductos(categoria) {
+            if (categoria === 'todos') {
+                mostrarProductos(productos);
+            } else {
+                const filtrados = productos.filter(p => p.categoria === categoria);
+                mostrarProductos(filtrados);
+            }
+        }
+
+        // Agregar al carrito
+        function agregarAlCarrito(id) {
+            const producto = productos.find(p => p.id === id);
+            const existe = carrito.find(item => item.id === id);
+
+            if (existe) {
+                existe.cantidad++;
+            } else {
+                carrito.push({ ...producto, cantidad: 1 });
+            }
+            actualizarCarrito();
+        }
+
+        // Modificar cantidades o eliminar
+        function cambiarCantidad(id, cambio) {
+            const item = carrito.find(i => i.id === id);
+            if (item) {
+                item.cantidad += cambio;
+                if (item.cantidad <= 0) {
+                    carrito = carrito.filter(i => i.id !== id);
+                }
+            }
+            actualizarCarrito();
+        }
+
+        // Actualizar la interfaz del carrito
+        function actualizarCarrito() {
+            const contenedorHTML = document.getElementById('items-carrito');
+            const totalHTML = document.getElementById('total-precio');
+            
+            if (carrito.length === 0) {
+                contenedorHTML.innerHTML = '<p>El carrito está vacío.</p>';
+                totalHTML.innerText = '0';
+                return;
+            }
+
+            contenedorHTML.innerHTML = '';
+            let total = 0;
+
+            carrito.forEach(item => {
+                total += item.precio * item.cantidad;
+                contenedorHTML.innerHTML += `
+                    <div class="item-carrito">
+                        <span>${item.nombre} (x${item.cantidad})</span>
+                        <div>
+                            <button onclick="cambiarCantidad(${item.id}, 1)">+</button>
+                            <button onclick="cambiarCantidad(${item.id}, -1)">-</button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            totalHTML.innerText = total.toLocaleString('es-CL');
+        }
+
+        // Envío automatizado a WhatsApp
+        function enviarWhatsApp() {
+            if (carrito.length === 0) {
+                alert("¡El carrito está vacío!");
+                return;
+            }
+
+            let mensaje = `✨ *Nuevo Pedido - Florencio Flores* ✨\n\n`;
+            let total = 0;
+
+            carrito.forEach(item => {
+                const subtotal = item.precio * item.cantidad;
+                mensaje += `• ${item.nombre} x${item.cantidad} ($${subtotal.toLocaleString('es-CL')})\n`;
+                total += subtotal;
+            });
+
+            mensaje += `\n💰 *Total a pagar:* $${total.toLocaleString('es-CL')}\n\n`;
+            mensaje += `Por favor, envíame los datos de transferencia para coordinar el envío. 🚚🌱`;
+
+            // Codificar el texto para la URL de WhatsApp
+            const urlMensaje = encodeURIComponent(mensaje);
+            window.open(`https://wa.me/${WHATSAPP_DANIELA}?text=${urlMensaje}`, '_blank');
+        }
+
+        // Inicializar la página mostrando todos los productos al cargar
+        mostrarProductos(productos);
+    </script>
+</body>
+</html>
