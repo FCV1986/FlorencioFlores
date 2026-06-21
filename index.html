@@ -10,7 +10,7 @@
         .contenedor { display: flex; gap: 20px; }
         .catalogo { flex: 3; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; }
         .producto-card { border: 1px solid #ccc; padding: 15px; border-radius: 8px; text-align: center; }
-        .producto-card img { max-width: 100%; height: auto; border-radius: 4px; }
+        .producto-card img { max-width: 100%; height: 180px; object-fit: cover; border-radius: 4px; }
         .carrito-seccion { flex: 1; border-left: 2px solid #ccc; padding-left: 20px; position: sticky; top: 20px; height: fit-content; }
         .filtros { margin-bottom: 20px; display: flex; gap: 10px; flex-wrap: wrap; }
         .btn-filtro { cursor: pointer; }
@@ -42,7 +42,7 @@
             </div>
             <hr>
             <h3>Total: $<span id="total-precio">0</span></h3>
-            <button style="background-color: #25D366; color: white; width: 100%; font-weight: bold;" onclick="enviarWhatsApp()">
+            <button style="background-color: #25D366; color: white; width: 100%; font-weight: bold; border: none; padding: 10px; cursor: pointer;" onclick="enviarWhatsApp()">
                 Confirmar Pedido por WhatsApp
             </button>
         </aside>
@@ -53,15 +53,24 @@
         let carrito = [];
         const WHATSAPP_DANIELA = "56912345678"; // ⚠️ REEMPLAZAR con el número real de Daniela (sin el +)
 
-        // Renderizar productos en pantalla
+        // Renderizar productos en pantalla (limpiando los guiones bajos solo para mostrar un título estético)
         function mostrarProductos(lista) {
             const grid = document.getElementById('grid-productos');
             grid.innerHTML = '';
+            
+            if (!lista || lista.length === 0) {
+                grid.innerHTML = '<p>No hay productos en esta categoría.</p>';
+                return;
+            }
+
             lista.forEach(p => {
+                // Reemplazamos los guiones bajos por espacios solo en el título visual para Daniela
+                const nombreFormateado = p.nombre.replace(/_/g, ' ');
+                
                 grid.innerHTML += `
                     <div class="producto-card">
-                        <img src="${p.imagen}" alt="${p.nombre}">
-                        <h4>${p.nombre}</h4>
+                        <img src="${p.imagen}" alt="${nombreFormateado}" onerror="this.src='https://cdn-icons-png.flaticon.com/512/628/628283.png'">
+                        <h4 style="text-transform: capitalize;">${nombreFormateado}</h4>
                         <p><strong>$${p.precio.toLocaleString('es-CL')}</strong></p>
                         <button onclick="agregarAlCarrito(${p.id})">Agregar</button>
                     </div>
@@ -120,9 +129,10 @@
 
             carrito.forEach(item => {
                 total += item.precio * item.cantidad;
+                const nombreItemFormateado = item.nombre.replace(/_/g, ' ');
                 contenedorHTML.innerHTML += `
                     <div class="item-carrito">
-                        <span>${item.nombre} (x${item.cantidad})</span>
+                        <span style="text-transform: capitalize;">${nombreItemFormateado} (x${item.cantidad})</span>
                         <div>
                             <button onclick="cambiarCantidad(${item.id}, 1)">+</button>
                             <button onclick="cambiarCantidad(${item.id}, -1)">-</button>
@@ -146,20 +156,26 @@
 
             carrito.forEach(item => {
                 const subtotal = item.precio * item.cantidad;
-                mensaje += `• ${item.nombre} x${item.cantidad} ($${subtotal.toLocaleString('es-CL')})\n`;
+                const nombreEnvio = item.nombre.replace(/_/g, ' ');
+                mensaje += `• ${nombreEnvio} x${item.cantidad} ($${subtotal.toLocaleString('es-CL')})\n`;
                 total += subtotal;
             });
 
             mensaje += `\n💰 *Total a pagar:* $${total.toLocaleString('es-CL')}\n\n`;
             mensaje += `Por favor, envíame los datos de transferencia para coordinar el envío. 🚚🌱`;
 
-            // Codificar el texto para la URL de WhatsApp
             const urlMensaje = encodeURIComponent(mensaje);
             window.open(`https://wa.me/${WHATSAPP_DANIELA}?text=${urlMensaje}`, '_blank');
         }
 
-        // Inicializar la página mostrando todos los productos al cargar
-        mostrarProductos(productos);
+        // DETONADOR SEGURO: Asegura que el catálogo cargue cuando el archivo js esté listo
+        window.onload = function() {
+            if (typeof productos !== 'undefined') {
+                mostrarProductos(productos);
+            } else {
+                console.error("Error: No se ha cargado el archivo productos.js");
+            }
+        };
     </script>
 </body>
 </html>
