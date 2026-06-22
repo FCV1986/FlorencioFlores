@@ -19,36 +19,21 @@
     </style>
 </head>
 <body>
-
     <header style="text-align: center; padding: 20px;">
         <img src="fotos_hortalizas/logo.jpg" alt="Logo Florencio Flores" style="width: 150px; height: auto; margin-bottom: 10px;">
-        <h1 style="margin: 0; font-family: sans-serif;">Florencio Flores</h1>
-        <p style="font-style: italic; color: #555;">"Brota tus sueños"</p>
-        <p>Catálogo oficial de semillas, plantas y bulbos de temporada.</p>
+        <h1>Florencio Flores</h1>
+        <p>"Brota tus sueños"</p>
     </header>
 
-    <div class="filtros">
-        <button class="btn-filtro" onclick="filtrarProductos('todos')">Todos</button>
-        <button class="btn-filtro" onclick="filtrarProductos('sobres-hortalizas')">Sobres Hortalizas</button>
-        <button class="btn-filtro" onclick="filtrarProductos('bolsas')">Bolsas con Semillas</button>
-        <button class="btn-filtro" onclick="filtrarProductos('bulbos-temporada')">Bulbos de Temporada</button>
-        <button class="btn-filtro" onclick="filtrarProductos('frutos-rojos')">Frutos Rojos</button>
-        <button class="btn-filtro" onclick="filtrarProductos('plantas-varias')">Plantas y Otras</button>
-    </div>
-
+    <div class="filtros" id="filtros-menu"></div>
     <div class="contenedor">
         <main class="catalogo" id="grid-productos"></main>
-
         <aside class="carrito-seccion">
             <h2>🛒 Tu Pedido</h2>
-            <div id="items-carrito">
-                <p>El carrito está vacío.</p>
-            </div>
+            <div id="items-carrito"><p>El carrito está vacío.</p></div>
             <hr>
             <h3>Total: $<span id="total-precio">0</span></h3>
-            <button style="background-color: #25D366; color: white; width: 100%; font-weight: bold; border: none; padding: 10px; cursor: pointer;" onclick="enviarWhatsApp()">
-                Confirmar Pedido por WhatsApp
-            </button>
+            <button style="background-color: #25D366; color: white; width: 100%; padding: 10px; border: none; cursor: pointer;" onclick="enviarWhatsApp()">Confirmar Pedido</button>
         </aside>
     </div>
 
@@ -124,25 +109,11 @@
             });
         }
 
-        function filtrarProductos(categoria) {
-            if (categoria === 'todos') mostrarProductos(productos);
-            else mostrarProductos(productos.filter(p => p.categoria === categoria));
-        }
-
         function agregarAlCarrito(id) {
             const producto = productos.find(p => p.id === id);
             const existe = carrito.find(item => item.id === id);
             if (existe) existe.cantidad++;
             else carrito.push({ ...producto, cantidad: 1 });
-            actualizarCarrito();
-        }
-
-        function cambiarCantidad(id, cambio) {
-            const item = carrito.find(i => i.id === id);
-            if (item) {
-                item.cantidad += cambio;
-                if (item.cantidad <= 0) carrito = carrito.filter(i => i.id !== id);
-            }
             actualizarCarrito();
         }
 
@@ -161,10 +132,7 @@
                 contenedorHTML.innerHTML += `
                     <div class="item-carrito">
                         <span>${item.nombre} (x${item.cantidad})</span>
-                        <div>
-                            <button onclick="cambiarCantidad(${item.id}, 1)">+</button>
-                            <button onclick="cambiarCantidad(${item.id}, -1)">-</button>
-                        </div>
+                        <button onclick="carrito = carrito.filter(i => i.id !== ${item.id}); actualizarCarrito();">X</button>
                     </div>
                 `;
             });
@@ -172,15 +140,9 @@
         }
 
         function enviarWhatsApp() {
-            if (carrito.length === 0) { alert("¡El carrito está vacío!"); return; }
-            let mensaje = `✨ *Nuevo Pedido - Florencio Flores* ✨\n\n`;
-            let total = 0;
-            carrito.forEach(item => {
-                const subtotal = item.precio * item.cantidad;
-                mensaje += `• ${item.nombre} x${item.cantidad} ($${subtotal.toLocaleString('es-CL')})\n`;
-                total += subtotal;
-            });
-            mensaje += `\n💰 *Total a pagar:* $${total.toLocaleString('es-CL')}\n\n`;
+            if (carrito.length === 0) return alert("Carrito vacío");
+            let mensaje = "Hola Daniela, quiero: ";
+            carrito.forEach(i => mensaje += `${i.nombre} (x${i.cantidad}), `);
             window.open(`https://wa.me/${WHATSAPP_DANIELA}?text=${encodeURIComponent(mensaje)}`, '_blank');
         }
 
