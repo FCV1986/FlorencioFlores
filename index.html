@@ -24,9 +24,10 @@
     
     </header>
 
-    <div class="filtros" id="filtros-menu">
-        <button onclick="filtrarProductos('todos')">Todos</button>
-        <button onclick="filtrarProductos('sobres-hortalizas')">Sobres Hortalizas</button>
+   <div class="filtros" id="filtros-menu">
+        <button onclick="mostrarProductos(productos)">Todos</button>
+        <button onclick="mostrarProductos(productos.filter(p => p.categoria === 'hortalizas'))">Hortalizas</button>
+        <button onclick="mostrarProductos(productos.filter(p => p.categoria === 'flores'))">Flores</button>
     </div>
 
     <div class="contenedor">
@@ -92,8 +93,35 @@
             { id: 49, nombre: "Zapallo Italiano Ama.", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/zapallo_italiano_amarillo.png" },
             { id: 50, nombre: "Zapallo Italiano Bola 8", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/zapallo_italiano_bola8.png" },
             { id: 51, nombre: "Zapallo Italiano Gris", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/zapallo_italiano_gris.jpg" }
-        ];
-
+            { id: 101, nombre: "Alegría del hogar", categoria: "flores", precio: 1000, imagen: "foto_flores/alegria_del_hogar.jpg" },
+            { id: 102, nombre: "Amapolas doble", categoria: "flores", precio: 1000, imagen: "foto_flores/amapolas_doble.jpeg" },
+            { id: 103, nombre: "Borraja", categoria: "flores", precio: 1000, imagen: "foto_flores/borraja.jpg" },
+            { id: 104, nombre: "Cactus y suculentas", categoria: "flores", precio: 1000, imagen: "foto_flores/cactus_y_suculentas.png" },
+            { id: 105, nombre: "Calendulas", categoria: "flores", precio: 1000, imagen: "foto_flores/calendulas.png" },
+            { id: 106, nombre: "Cartuchos", categoria: "flores", precio: 1000, imagen: "foto_flores/cartuchos.png" },
+            { id: 107, nombre: "Celosia cresta de gallo", categoria: "flores", precio: 1000, imagen: "foto_flores/celosia_cresta_de_gallo.jpg" },
+            { id: 108, nombre: "Celosia plumosa", categoria: "flores", precio: 1000, imagen: "foto_flores/celosia_plumosa.jpg" },
+            { id: 109, nombre: "Clavel gigante", categoria: "flores", precio: 1000, imagen: "foto_flores/clavel_gigante.jpg" },
+            { id: 110, nombre: "Clavelina china", categoria: "flores", precio: 1000, imagen: "foto_flores/clavelina_china.jpg" },
+            { id: 111, nombre: "Clavelina japonesa", categoria: "flores", precio: 1000, imagen: "foto_flores/clavelina_japonesa.jpeg" },
+            { id: 112, nombre: "Clavel lanudo", categoria: "flores", precio: 1000, imagen: "foto_flores/clavel_lanudo.jpg" },
+            { id: 113, nombre: "Clavelon enano", categoria: "flores", precio: 1000, imagen: "foto_flores/clavelon_enano.jpg" },
+            { id: 114, nombre: "Cosmos sensación", categoria: "flores", precio: 1000, imagen: "foto_flores/cosmos_sensacion.jpg" },
+            { id: 115, nombre: "Crisantemos variados", categoria: "flores", precio: 1000, imagen: "foto_flores/crisantemos_variados.jpg" },
+            { id: 116, nombre: "Dalia cactus", categoria: "flores", precio: 1000, imagen: "foto_flores/dalia_cactus.jpg" },
+            { id: 117, nombre: "Dalia enana", categoria: "flores", precio: 1000, imagen: "foto_flores/dalia_enana.jpg" },
+            { id: 118, nombre: "Gazanias mixtas", categoria: "flores", precio: 1000, imagen: "foto_flores/gazanias_mixtas.jpg" },
+            { id: 119, nombre: "Girasol amarillo", categoria: "flores", precio: 1000, imagen: "foto_flores/girasol_amarillo.jpg" },
+            { id: 120, nombre: "Ilusión paniculata", categoria: "flores", precio: 1000, imagen: "foto_flores/ilusion_paniculata.jpg" },
+            { id: 121, nombre: "Malva mixta", categoria: "flores", precio: 1000, imagen: "foto_flores/malva_mixta.png" },
+            { id: 122, nombre: "Manzanilla", categoria: "flores", precio: 1000, imagen: "foto_flores/manzanilla.jpg" },
+            { id: 123, nombre: "Margarita africana", categoria: "flores", precio: 1000, imagen: "foto_flores/margarita_africana.jpg" },
+            { id: 124, nombre: "Petunia colorama", categoria: "flores", precio: 1000, imagen: "foto_flores/petunia_colorama.png" },
+            { id: 125, nombre: "Reina Luisa americana", categoria: "flores", precio: 1000, imagen: "foto_flores/reina_luisa_americana.jpeg" },
+            { id: 126, nombre: "Reina Luisa doble", categoria: "flores", precio: 1000, imagen: "foto_flores/reina_luisa_doble.jpeg" },
+            { id: 127, nombre: "Reina Luisa matsumoto", categoria: "flores", precio: 1000, imagen: "foto_flores/reina_luisa_matsumoto.jpeg" },
+            { id: 128, nombre: "Suspiros", categoria: "flores", precio: 1000, imagen: "foto_flores/suspiros.png" }
+];
         let carrito = [];
         const WHATSAPP_DANIELA = "56966956878";
 
