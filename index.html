@@ -23,12 +23,10 @@
     </header>
 
     <div class="filtros" id="filtros-menu">
-    <button onclick="mostrarProductos(productos)">Todos</button>
-    <button onclick="mostrarProductos(productos.filter(p => p.categoria === 'hortalizas'))">Hortalizas</button>
-    <button onclick="mostrarProductos(productos.filter(p => p.categoria === 'flores'))">Flores</button>
-    
-    <button onclick="mostrarProductos(productos.filter(p => p.categoria === 'legumbres'))">Legumbres y Varios</button>
-</div>
+        <button onclick="mostrarProductos(productos)">Todos</button>
+        <button onclick="mostrarProductos(productos.filter(p => p.categoria === 'hortalizas'))">Hortalizas</button>
+        <button onclick="mostrarProductos(productos.filter(p => p.categoria === 'flores'))">Flores</button>
+        <button onclick="mostrarProductos(productos.filter(p => p.categoria === 'legumbres'))">Legumbres y Varios</button>
     </div>
 
     <div class="contenedor">
@@ -45,15 +43,15 @@
     <script>
         const productos = [
             // Hortalizas
-            { id: 1,  nombre: "Acelga Tallo Naranjo", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/acelga_tallo_naranjo.png" },
-            { id: 2,  nombre: "Achicoria", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/achicoria.jpg" },
-            { id: 3,  nombre: "Ají Cacho de Cabra", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/aji_cacho.jpg" },
-            { id: 4,  nombre: "Ají Cristal", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/aji_cristal.jpeg" },
-            { id: 5,  nombre: "Ají Habanero", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/aji_habanero.png" },
-            { id: 6,  nombre: "Ají Jalapeño", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/aji_jalapeno.png" },
-            { id: 7,  nombre: "Amaranto", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/amaranto.jpg" },
-            { id: 8,  nombre: "Apio", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/apio.jpg" },
-            { id: 9,  nombre: "Berenjena", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/berenjena.png" },
+            { id: 1, nombre: "Acelga Tallo Naranjo", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/acelga_tallo_naranjo.png" },
+            { id: 2, nombre: "Achicoria", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/achicoria.jpg" },
+            { id: 3, nombre: "Ají Cacho de Cabra", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/aji_cacho.jpg" },
+            { id: 4, nombre: "Ají Cristal", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/aji_cristal.jpeg" },
+            { id: 5, nombre: "Ají Habanero", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/aji_habanero.png" },
+            { id: 6, nombre: "Ají Jalapeño", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/aji_jalapeno.png" },
+            { id: 7, nombre: "Amaranto", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/amaranto.jpg" },
+            { id: 8, nombre: "Apio", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/apio.jpg" },
+            { id: 9, nombre: "Berenjena", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/berenjena.png" },
             { id: 10, nombre: "Berro", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/berro.jpg" },
             { id: 11, nombre: "Brócoli", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/brocoli.jpg" },
             { id: 12, nombre: "Cebolla Texas", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/cebolla_texas.png" },
@@ -96,7 +94,7 @@
             { id: 50, nombre: "Zapallo Italiano Bola 8", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/zapallo_italiano_bola8.png" },
             { id: 51, nombre: "Zapallo Italiano Gris", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/zapallo_italiano_gris.jpg" },
             // Flores
-            { id: 101, nombre: "Alegría del hogar", categoria: "flores", precio: 1000, imagen: "foto_flores/alegria_del_hogar.jpg" },
+            { id: 101, nombre: "Alegría del hogar", categoria: "flores", precio: 1000, imagen: "foto_flores/alegria.jpg" },
             { id: 102, nombre: "Amapolas doble", categoria: "flores", precio: 1000, imagen: "foto_flores/amapolas_doble.jpg" },
             { id: 103, nombre: "Borraja", categoria: "flores", precio: 1000, imagen: "foto_flores/borraja.jpg" },
             { id: 104, nombre: "Cactus y suculentas", categoria: "flores", precio: 1000, imagen: "foto_flores/cactus_y_suculentas.png" },
@@ -123,9 +121,8 @@
             { id: 125, nombre: "Reina Luisa americana", categoria: "flores", precio: 1000, imagen: "foto_flores/reina_luisa_americana.jpg" },
             { id: 126, nombre: "Reina Luisa doble", categoria: "flores", precio: 1000, imagen: "foto_flores/reina_luisa_doble.jpg" },
             { id: 127, nombre: "Reina Luisa matsumoto", categoria: "flores", precio: 1000, imagen: "foto_flores/reina_luisa_matsumoto.jpg" },
-            { id: 128, nombre: "Suspiros", categoria: "flores", precio: 1000, imagen: "foto_flores/suspiros.png" }
-            const productos = [
-            // Porotos y Legumbres
+            { id: 128, nombre: "Suspiros", categoria: "flores", precio: 1000, imagen: "foto_flores/suspiros.png" },
+            // Legumbres
             { id: 201, nombre: "Alcayota", categoria: "legumbres", precio: 1000, imagen: "foto_porotos/alcayota.jpg" },
             { id: 202, nombre: "Arveja de mata", categoria: "legumbres", precio: 1000, imagen: "foto_porotos/arveja_de_mata.jpg" },
             { id: 203, nombre: "Arveja sin hila", categoria: "legumbres", precio: 1000, imagen: "foto_porotos/arveja_sin-hila.jpg" },
@@ -146,8 +143,6 @@
             { id: 218, nombre: "Poroto rubí", categoria: "legumbres", precio: 1000, imagen: "foto_porotos/poroto_rubi.jpg" },
             { id: 219, nombre: "Poroto señorita", categoria: "legumbres", precio: 1000, imagen: "foto_porotos/poroto_senorita.jpg" },
             { id: 220, nombre: "Poroto sofía", categoria: "legumbres", precio: 1000, imagen: "foto_porotos/poroto_sofia.jpg" }
-            // ... aquí puedes continuar con tus Flores y Hortalizas usando el mismo formato
-
         ];
 
         let carrito = [];
@@ -205,7 +200,6 @@
             window.open(`https://wa.me/${WHATSAPP_DANIELA}?text=${encodeURIComponent(mensaje)}`, '_blank');
         }
 
-        // Cargar todo al iniciar
         mostrarProductos(productos);
     </script>
 </body>
