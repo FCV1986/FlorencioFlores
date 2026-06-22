@@ -6,101 +6,24 @@
     <title>Florencio Flores</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
     <style>
-        /* Tus estilos van aquí */
+        body { max-width: 1200px; margin: 0 auto; padding: 20px; background-color: #ffffff; color: #111111; }
+        .contenedor { display: flex; gap: 20px; align-items: flex-start; }
+        .catalogo { flex: 3; display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px; }
+        .producto-card { border: 2px solid #2ecc11; padding: 15px; border-radius: 8px; text-align: center; background: #ffffff; }
+        .producto-card img { max-width: 100%; height: 180px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto 10px; }
+        .carrito-seccion { flex: 1; min-width: 260px; border-left: 2px solid #2ecc11; padding-left: 20px; position: sticky; top: 20px; height: fit-content; }
+        .carrito-seccion p, .carrito-seccion div, .carrito-seccion h2, .carrito-seccion h3, p { color: #111111 !important; }
+        .filtros { margin-bottom: 20px; display: flex; gap: 10px; flex-wrap: wrap; }
+        .btn-filtro { cursor: pointer; }
+        .item-carrito { display: flex; justify-content: space-between; margin-bottom: 10px; }
     </style>
 </head>
 <body>
 
-    <!-- El header va aquí adentro, en el cuerpo -->
     <header style="text-align: center; padding: 20px;">
         <img src="fotos_hortalizas/logo.jpg" alt="Logo Florencio Flores" style="width: 150px; height: auto; margin-bottom: 10px;">
         <h1 style="margin: 0; font-family: sans-serif;">Florencio Flores</h1>
         <p style="font-style: italic; color: #555;">"Brota tus sueños"</p>
-    </header>
-
-    <!-- Aquí seguiría el resto de tu contenido (catálogo, botones, etc.) -->
-
-
-        body { 
-            max-width: 1200px; 
-            margin: 0 auto; 
-            padding: 20px; 
-            background-color: #ffffff; 
-            color: #111111; 
-        }
-        
-        /* Estructura en columnas fijas */
-        .contenedor { 
-            display: flex; 
-            gap: 20px; 
-            align-items: flex-start; 
-        }
-        
-        /* Cuadrícula de productos */
-        .catalogo { 
-            flex: 3; 
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); 
-            gap: 15px; 
-        }
-        
-        /* Tarjetas con bordes verdes y fondo blanco */
-        .producto-card { 
-            border: 2px solid #2ecc11; 
-            padding: 15px; 
-            border-radius: 8px; 
-            text-align: center; 
-            background: #ffffff; 
-        }
-        
-        .producto-card img { 
-            max-width: 100%; 
-            height: 180px; 
-            object-fit: cover; 
-            border-radius: 4px; 
-            display: block; 
-            margin: 0 auto 10px; 
-        }
-        
-        /* Barra del carrito fijada a la derecha */
-        .carrito-seccion { 
-            flex: 1; 
-            min-width: 260px; 
-            border-left: 2px solid #2ecc11; 
-            padding-left: 20px; 
-            position: sticky; 
-            top: 20px; 
-            height: fit-content; 
-        }
-        
-        /* Textos siempre en negro visible */
-        .carrito-seccion p, .carrito-seccion div, .carrito-seccion h2, .carrito-seccion h3, p {
-            color: #111111 !important; 
-        }
-        
-        .filtros { 
-            margin-bottom: 20px; 
-            display: flex; 
-            gap: 10px; 
-            flex-wrap: wrap; 
-        }
-        
-        .btn-filtro { 
-            cursor: pointer; 
-        }
-        
-        .item-carrito { 
-            display: flex; 
-            justify-content: space-between; 
-            margin-bottom: 10px; 
-        }
-    </style>
-</head>
-<body>
-
-    <header>
-        <h1 style="color: #111111;">🌱 Florencio Flores</h1>
-        <p style="font-style: italic; color: #555; font-size: 1.2em; margin-top: -5px;">"Brota tus sueños"</p>
         <p>Catálogo oficial de semillas, plantas y bulbos de temporada.</p>
     </header>
 
@@ -131,56 +54,56 @@
 
     <script>
         const productos = [
-            { id: 1,  nombre: "Acelga Tallo Naranjo",    categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/acelga_tallo_naranjo.png" },
-            { id: 2,  nombre: "Achicoria",              categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/achicoria.jpg" },
-            { id: 3,  nombre: "Ají Cacho de Cabra",      categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/aji_cacho.jpg" },
-            { id: 4,  nombre: "Ají Cristal",             categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/aji_cristal.jpeg" },
-            { id: 5,  nombre: "Ají Habanero",            categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/aji_habanero.png" },
-            { id: 6,  nombre: "Ají Jalapeño",            categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/aji_jalapeno.png" },
-            { id: 7,  nombre: "Amaranto",               categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/amaranto.jpg" },
-            { id: 8,  nombre: "Apio",                   categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/apio.jpg" },
-            { id: 9,  nombre: "Berenjena",              categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/berenjena.png" },
-            { id: 10, nombre: "Berro",                  categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/berro.jpg" },
-            { id: 11, nombre: "Brócoli",                categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/brocoli.jpg" },
-            { id: 12, nombre: "Cebolla Texas",          categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/cebolla_texas.png" },
-            { id: 13, nombre: "Cebolla Morada",         categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/cebolla_morada.jpg" },
-            { id: 14, nombre: "Cebolla Red",            categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/cebolla_red.jpg" },
-            { id: 15, nombre: "Col China",              categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/col_china.jpg" },
-            { id: 16, nombre: "Coliflor",               categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/coliflor.jpg" },
-            { id: 17, nombre: "Coliflor Romanesco",     categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/coliflor_romanesco.gif" },
-            { id: 18, nombre: "Kale Crespo",            categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/kale_crespo.png" },
-            { id: 19, nombre: "Kale Rizado",            categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/kale_rizado.jpg" },
-            { id: 20, nombre: "Kale Toscano",           categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/kale_toscano.jpg" },
-            { id: 21, nombre: "Kale 2",                 categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/kale_2.webp" },
+            { id: 1,  nombre: "Acelga Tallo Naranjo", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/acelga_tallo_naranjo.png" },
+            { id: 2,  nombre: "Achicoria", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/achicoria.jpg" },
+            { id: 3,  nombre: "Ají Cacho de Cabra", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/aji_cacho.jpg" },
+            { id: 4,  nombre: "Ají Cristal", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/aji_cristal.jpeg" },
+            { id: 5,  nombre: "Ají Habanero", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/aji_habanero.png" },
+            { id: 6,  nombre: "Ají Jalapeño", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/aji_jalapeno.png" },
+            { id: 7,  nombre: "Amaranto", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/amaranto.jpg" },
+            { id: 8,  nombre: "Apio", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/apio.jpg" },
+            { id: 9,  nombre: "Berenjena", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/berenjena.png" },
+            { id: 10, nombre: "Berro", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/berro.jpg" },
+            { id: 11, nombre: "Brócoli", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/brocoli.jpg" },
+            { id: 12, nombre: "Cebolla Texas", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/cebolla_texas.png" },
+            { id: 13, nombre: "Cebolla Morada", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/cebolla_morada.jpg" },
+            { id: 14, nombre: "Cebolla Red", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/cebolla_red.jpg" },
+            { id: 15, nombre: "Col China", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/col_china.jpg" },
+            { id: 16, nombre: "Coliflor", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/coliflor.jpg" },
+            { id: 17, nombre: "Coliflor Romanesco", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/coliflor_romanesco.gif" },
+            { id: 18, nombre: "Kale Crespo", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/kale_crespo.png" },
+            { id: 19, nombre: "Kale Rizado", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/kale_rizado.jpg" },
+            { id: 20, nombre: "Kale Toscano", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/kale_toscano.jpg" },
+            { id: 21, nombre: "Kale 2", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/kale_2.webp" },
             { id: 22, nombre: "Lechuga Catalogna Roja", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/lechuga_catalogna_roja.png" },
-            { id: 23, nombre: "Lechuga Lollo Rosa",     categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/lechuga_lollo_rosa.jpg" },
-            { id: 24, nombre: "Lechuga Lunanera",       categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/lechuga_lunanera.png" },
-            { id: 25, nombre: "Lechuga Matrioska",      categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/lechuga_matrioska.jpg" },
+            { id: 23, nombre: "Lechuga Lollo Rosa", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/lechuga_lollo_rosa.jpg" },
+            { id: 24, nombre: "Lechuga Lunanera", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/lechuga_lunanera.png" },
+            { id: 25, nombre: "Lechuga Matrioska", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/lechuga_matrioska.jpg" },
             { id: 26, nombre: "Lechuga Red Salad Bowl", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/lechuga_red_salad_bowl.png" },
-            { id: 27, nombre: "Melón Calameño",         categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/melon_calameno.jpg" },
-            { id: 28, nombre: "Melón Tuna",             categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/melon_tuna.png" },
-            { id: 29, nombre: "Mizuna Roja",            categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/mizuna_roja.jpg" },
-            { id: 30, nombre: "Mizuna Verde",           categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/mizuna_verde.jpg" },
-            { id: 31, nombre: "Mostaza",                categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/mostaza.png" },
-            { id: 32, nombre: "Nabo",                   categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/nabo.jpg" },
-            { id: 33, nombre: "Okra",                   categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/okra.jpg" },
-            { id: 34, nombre: "Pak Choi Rojo",          categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/pak_choi_rojo.png" },
-            { id: 35, nombre: "Pak Choi Verde",         categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/pak_choi_verde.png" },
-            { id: 36, nombre: "Perejil Crespo",         categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/perejil_crespo.jpg" },
-            { id: 37, nombre: "Pimentón Amarillo",       categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/pimiento_amarillo.jpg" },
-            { id: 38, nombre: "Pimentón Rojo",           categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/pimenton_rojo.jpg" },
-            { id: 40, nombre: "Repollo de Bruselas",    categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/buselas.png" },
-            { id: 41, nombre: "Rúcula",                 categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/rucula.jpg" },
-            { id: 42, text_align: "center", nombre: "Sandía Antonia", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/sandia_antonia.png" },
-            { id: 43, nombre: "Sandía Klondike",        categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/sandia_klondike.png" },
-            { id: 44, nombre: "Tatsoi",                 categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/tatsoi.png" },
-            { id: 45, nombre: "Tomate Amarillo",        categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/tomate_amarillo.png" },
-            { id: 46, nombre: "Tomate Cal Ace",         categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/tomate_cal_ace.jpg" },
-            { id: 47, nombre: "Tomate Rosado",          categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/tomate_rosado.jpg" },
-            { id: 48, nombre: "Zapallo Butternut",      categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/zapallo_butternut.png" },
-            { id: 49, nombre: "Zapallo Italiano Ama.",  categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/zapallo_italiano_amarillo.png" },
-            { id: 50, nombre: "Zapallo Italiano Bola 8",categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/zapallo_italiano_bola8.png" },
-            { id: 51, nombre: "Zapallo Italiano Gris",  categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/zapallo_italiano_gris.jpg" }
+            { id: 27, nombre: "Melón Calameño", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/melon_calameno.jpg" },
+            { id: 28, nombre: "Melón Tuna", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/melon_tuna.png" },
+            { id: 29, nombre: "Mizuna Roja", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/mizuna_roja.jpg" },
+            { id: 30, nombre: "Mizuna Verde", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/mizuna_verde.jpg" },
+            { id: 31, nombre: "Mostaza", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/mostaza.png" },
+            { id: 32, nombre: "Nabo", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/nabo.jpg" },
+            { id: 33, nombre: "Okra", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/okra.jpg" },
+            { id: 34, nombre: "Pak Choi Rojo", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/pak_choi_rojo.png" },
+            { id: 35, nombre: "Pak Choi Verde", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/pak_choi_verde.png" },
+            { id: 36, nombre: "Perejil Crespo", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/perejil_crespo.jpg" },
+            { id: 37, nombre: "Pimentón Amarillo", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/pimiento_amarillo.jpg" },
+            { id: 38, nombre: "Pimentón Rojo", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/pimenton_rojo.jpg" },
+            { id: 40, nombre: "Repollo de Bruselas", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/buselas.png" },
+            { id: 41, nombre: "Rúcula", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/rucula.jpg" },
+            { id: 42, nombre: "Sandía Antonia", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/sandia_antonia.png" },
+            { id: 43, nombre: "Sandía Klondike", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/sandia_klondike.png" },
+            { id: 44, nombre: "Tatsoi", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/tatsoi.png" },
+            { id: 45, nombre: "Tomate Amarillo", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/tomate_amarillo.png" },
+            { id: 46, nombre: "Tomate Cal Ace", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/tomate_cal_ace.jpg" },
+            { id: 47, nombre: "Tomate Rosado", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/tomate_rosado.jpg" },
+            { id: 48, nombre: "Zapallo Butternut", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/zapallo_butternut.png" },
+            { id: 49, nombre: "Zapallo Italiano Ama.", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/zapallo_italiano_amarillo.png" },
+            { id: 50, nombre: "Zapallo Italiano Bola 8", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/zapallo_italiano_bola8.png" },
+            { id: 51, nombre: "Zapallo Italiano Gris", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/zapallo_italiano_gris.jpg" }
         ];
 
         let carrito = [];
@@ -189,50 +112,28 @@
         function mostrarProductos(lista) {
             const grid = document.getElementById('grid-productos');
             grid.innerHTML = '';
-            
-            if (!lista || lista.length === 0) {
-                grid.innerHTML = '<p style="color: #111111; font-weight: bold; text-align: center; width: 100%;">No hay productos en esta categoría.</p>';
-                return;
-            }
-
             lista.forEach(p => {
                 grid.innerHTML += `
                     <div class="producto-card">
                         <img src="${p.imagen}" alt="${p.nombre}" onerror="this.src='https://cdn-icons-png.flaticon.com/512/628/628283.png'">
-                        
-                        <h4 style="color: #111111; margin: 10px 0 5px 0; font-size: 1.1em; font-weight: bold;">
-                            ${p.nombre}
-                        </h4>
-                        
-                        <p style="margin: 5px 0 10px 0; font-size: 1.05em;">
-                            <strong style="color: #111111;">$${p.precio.toLocaleString('es-CL')}</strong>
-                        </p>
-                        
-                        <button onclick="agregarAlCarrito(${p.id})" style="cursor: pointer;">
-                            Agregar
-                        </button>
+                        <h4>${p.nombre}</h4>
+                        <p><strong>$${p.precio.toLocaleString('es-CL')}</strong></p>
+                        <button onclick="agregarAlCarrito(${p.id})">Agregar</button>
                     </div>
                 `;
             });
         }
 
         function filtrarProductos(categoria) {
-            if (categoria === 'todos') {
-                mostrarProductos(productos);
-            } else {
-                const filtrados = productos.filter(p => p.categoria === categoria);
-                mostrarProductos(filtrados);
-            }
+            if (categoria === 'todos') mostrarProductos(productos);
+            else mostrarProductos(productos.filter(p => p.categoria === categoria));
         }
 
         function agregarAlCarrito(id) {
             const producto = productos.find(p => p.id === id);
             const existe = carrito.find(item => item.id === id);
-            if (existe) {
-                existe.cantidad++;
-            } else {
-                carrito.push({ ...producto, cantidad: 1 });
-            }
+            if (existe) existe.cantidad++;
+            else carrito.push({ ...producto, cantidad: 1 });
             actualizarCarrito();
         }
 
@@ -240,9 +141,7 @@
             const item = carrito.find(i => i.id === id);
             if (item) {
                 item.cantidad += cambio;
-                if (item.cantidad <= 0) {
-                    carrito = carrito.filter(i => i.id !== id);
-                }
+                if (item.cantidad <= 0) carrito = carrito.filter(i => i.id !== id);
             }
             actualizarCarrito();
         }
@@ -250,21 +149,18 @@
         function actualizarCarrito() {
             const contenedorHTML = document.getElementById('items-carrito');
             const totalHTML = document.getElementById('total-precio');
-            
             if (carrito.length === 0) {
-                contenedorHTML.innerHTML = '<p style="color: #111111;">El carrito está vacío.</p>';
+                contenedorHTML.innerHTML = '<p>El carrito está vacío.</p>';
                 totalHTML.innerText = '0';
                 return;
             }
-
             contenedorHTML.innerHTML = '';
             let total = 0;
-
             carrito.forEach(item => {
                 total += item.precio * item.cantidad;
                 contenedorHTML.innerHTML += `
                     <div class="item-carrito">
-                        <span style="color: #111111;">${item.nombre} (x${item.cantidad})</span>
+                        <span>${item.nombre} (x${item.cantidad})</span>
                         <div>
                             <button onclick="cambiarCantidad(${item.id}, 1)">+</button>
                             <button onclick="cambiarCantidad(${item.id}, -1)">-</button>
@@ -276,10 +172,7 @@
         }
 
         function enviarWhatsApp() {
-            if (carrito.length === 0) {
-                alert("¡El carrito está vacío!");
-                return;
-            }
+            if (carrito.length === 0) { alert("¡El carrito está vacío!"); return; }
             let mensaje = `✨ *Nuevo Pedido - Florencio Flores* ✨\n\n`;
             let total = 0;
             carrito.forEach(item => {
@@ -288,14 +181,10 @@
                 total += subtotal;
             });
             mensaje += `\n💰 *Total a pagar:* $${total.toLocaleString('es-CL')}\n\n`;
-            mensaje += `Por favor, envíame los datos de transferencia para coordinar el envío. 🚚🌱`;
             window.open(`https://wa.me/${WHATSAPP_DANIELA}?text=${encodeURIComponent(mensaje)}`, '_blank');
         }
 
         mostrarProductos(productos);
-
-        </body>
-</html>
     </script>
 </body>
 </html>
