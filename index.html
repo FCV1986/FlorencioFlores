@@ -4,28 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Florencio Flores</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
     <style>
-        body { max-width: 1200px; margin: 0 auto; padding: 20px; background-color: #ffffff; color: #111111; }
+        body { max-width: 1200px; margin: 0 auto; padding: 20px; background-color: #ffffff; color: #111111; font-family: sans-serif; }
+        header { text-align: center; padding: 20px; }
+        header img { width: 150px; height: auto; margin-bottom: 10px; }
         .contenedor { display: flex; gap: 20px; align-items: flex-start; }
         .catalogo { flex: 3; display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px; }
         .producto-card { border: 2px solid #2ecc11; padding: 15px; border-radius: 8px; text-align: center; background: #ffffff; }
         .producto-card img { max-width: 100%; height: 180px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto 10px; }
-        .carrito-seccion { flex: 1; min-width: 260px; border-left: 2px solid #2ecc11; padding-left: 20px; position: sticky; top: 20px; height: fit-content; }
-        .carrito-seccion p, .carrito-seccion div, .carrito-seccion h2, .carrito-seccion h3, p { color: #111111 !important; }
+        .carrito-seccion { flex: 1; min-width: 260px; border-left: 2px solid #2ecc11; padding-left: 20px; position: sticky; top: 20px; }
         .filtros { margin-bottom: 20px; display: flex; gap: 10px; flex-wrap: wrap; }
-        .btn-filtro { cursor: pointer; }
-        .item-carrito { display: flex; justify-content: space-between; margin-bottom: 10px; }
     </style>
 </head>
 <body>
-    <header style="text-align: center; padding: 20px;">
-        <img src="fotos_hortalizas/logo.jpg" alt="Logo Florencio Flores" style="width: 150px; height: auto; margin-bottom: 10px;">
+
+    <header>
+        <img src="fotos_hortalizas/logo.jpg" alt="Logo Florencio Flores">
         <h1>Florencio Flores</h1>
         <p>"Brota tus sueños"</p>
     </header>
 
-    <div class="filtros" id="filtros-menu"></div>
+    <div class="filtros" id="filtros-menu">
+        <button onclick="filtrarProductos('todos')">Todos</button>
+        <button onclick="filtrarProductos('sobres-hortalizas')">Sobres Hortalizas</button>
+    </div>
+
     <div class="contenedor">
         <main class="catalogo" id="grid-productos"></main>
         <aside class="carrito-seccion">
@@ -130,7 +133,7 @@
             carrito.forEach(item => {
                 total += item.precio * item.cantidad;
                 contenedorHTML.innerHTML += `
-                    <div class="item-carrito">
+                    <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
                         <span>${item.nombre} (x${item.cantidad})</span>
                         <button onclick="carrito = carrito.filter(i => i.id !== ${item.id}); actualizarCarrito();">X</button>
                     </div>
