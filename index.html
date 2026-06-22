@@ -6,18 +6,85 @@
     <title>Florencio Flores - Tienda de Semillas y Plantas</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
     <style>
-    body { max-width: 1200px; margin: 0 auto; padding: 20px; background-color: #ffffff; color: #111111; }        .catalogo { flex: 3; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; }
-        .producto-card { border: 2px solid #2ecc11; padding: 15px; border-radius: 8px; text-align: center; background: #ffffff; }        .producto-card img { max-width: 100%; height: 180px; object-fit: cover; border-radius: 4px; display: block; margin: 0 auto 10px; }
-        .carrito-seccion p, .carrito-seccion div, p {
-        color: #111111 !important; /* Fuerza a que todos los textos informativos sean negros */
-    }    .btn-filtro { cursor: pointer; }
-        .item-carrito { display: flex; justify-content: space-between; margin-bottom: 10px; }
+        body { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 20px; 
+            background-color: #ffffff; 
+            color: #111111; 
+        }
+        
+        /* Estructura en columnas para evitar que el carrito se caiga */
+        .contenedor { 
+            display: flex; 
+            gap: 20px; 
+            align-items: flex-start; 
+        }
+        
+        /* Cuadrícula de productos adaptada */
+        .catalogo { 
+            flex: 3; 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); 
+            gap: 15px; 
+        }
+        
+        /* Tarjetas con bordes verdes y fondo blanco */
+        .producto-card { 
+            border: 2px solid #2ecc11; 
+            padding: 15px; 
+            border-radius: 8px; 
+            text-align: center; 
+            background: #ffffff; 
+        }
+        
+        .producto-card img { 
+            max-width: 100%; 
+            height: 180px; 
+            object-fit: cover; 
+            border-radius: 4px; 
+            display: block; 
+            margin: 0 auto 10px; 
+        }
+        
+        /* Barra del carrito fijada a la derecha */
+        .carrito-seccion { 
+            flex: 1; 
+            min-width: 260px; 
+            border-left: 2px solid #2ecc11; 
+            padding-left: 20px; 
+            position: sticky; 
+            top: 20px; 
+            height: fit-content; 
+        }
+        
+        /* Textos del carrito y alertas siempre en negro visible */
+        .carrito-seccion p, .carrito-seccion div, .carrito-seccion h2, .carrito-seccion h3, p {
+            color: #111111 !important; 
+        }
+        
+        .filtros { 
+            margin-bottom: 20px; 
+            display: flex; 
+            gap: 10px; 
+            flex-wrap: wrap; 
+        }
+        
+        .btn-filtro { 
+            cursor: pointer; 
+        }
+        
+        .item-carrito { 
+            display: flex; 
+            justify-content: space-between; 
+            margin-bottom: 10px; 
+        }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>🌱 Florencio Flores</h1>
+        <h1 style="color: #111111;">🌱 Florencio Flores</h1>
         <p style="font-style: italic; color: #555; font-size: 1.2em; margin-top: -5px;">"Brota tus sueños"</p>
         <p>Catálogo oficial de semillas, plantas y bulbos de temporada.</p>
     </header>
@@ -25,7 +92,7 @@
     <div class="filtros">
         <button class="btn-filtro" onclick="filtrarProductos('todos')">Todos</button>
         <button class="btn-filtro" onclick="filtrarProductos('sobres-hortalizas')">Sobres Hortalizas</button>
-        <button class="btn-filtro" onclick="filtrar('bolsas')">Bolsas con Semillas</button>
+        <button class="btn-filtro" onclick="filtrarProductos('bolsas')">Bolsas con Semillas</button>
         <button class="btn-filtro" onclick="filtrarProductos('bulbos-temporada')">Bulbos de Temporada</button>
         <button class="btn-filtro" onclick="filtrarProductos('frutos-rojos')">Frutos Rojos</button>
         <button class="btn-filtro" onclick="filtrarProductos('plantas-varias')">Plantas y Otras</button>
@@ -53,8 +120,8 @@
           { id: 2, nombre: "Achicoria", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/achicoria.jpg" },
           { id: 3, nombre: "Ají Cacho de Cabra", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/aji_cacho.jpg" },
           { id: 4, nombre: "Ají Cristal", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/aji_cristal.jpeg" },
-          { id: 5, nombre: "Ají Habanero", precio: 1000, imagen: "fotos_hortalizas/aji_habanero.png" },
-{ id: 6, nombre: "Ají Jalapeño", precio: 1000, imagen: "fotos_hortalizas/aji_jalapeno.jpeg" },
+          { id: 5, nombre: "Ají Habanero", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/aji_habanero.png" },
+          { id: 6, nombre: "Ají Jalapeño", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/aji_jalapeno.png" },
           { id: 7, nombre: "Amaranto", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/amaranto.jpg" },
           { id: 8, nombre: "Apio", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/apio.jpg" },
           { id: 9, nombre: "Berenjena", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/berenjena.png" },
@@ -99,42 +166,44 @@
           { id: 48, nombre: "Zapallo Butternut", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/zapallo_butternut.png" },
           { id: 49, nombre: "Zapallo Italiano Amarillo", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/zapallo_italiano_amarillo.png" },
           { id: 50, nombre: "Zapallo Italiano Bola 8", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/zapallo_italiano_bola8.png" },
-          { id: 51, nombre: "Zapallo Italiano Gris", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/zapallo_italiano_gris.jpg" }
+          { id: 51, nombre: "Zapallo Italiano Gris", categoria: "sobres-hortalizas", precio: 1000, imagen: "fotos_hortalizas/zapallo_italiano_gris.jpg" },
+          
+          /* Nueva Sección: Ejemplo de Bolsa con Semillas */
+          { id: 52, nombre: "Bolsa Mix de Hortalizas", categoria: "bolsas", precio: 2500, imagen: "fotos_hortalizas/bolsa_semillas.png" }
         ];
 
         let carrito = [];
         const WHATSAPP_DANIELA = "56966956878";
 
         function mostrarProductos(lista) {
-    const grid = document.getElementById('grid-productos');
-    grid.innerHTML = '';
-    
-    if (!lista || lista.length === 0) {
-        // Forzamos también a que este mensaje de alerta sea negro y visible
-        grid.innerHTML = '<p style="color: #111111; font-weight: bold; text-align: center; width: 100%;">No hay productos en esta categoría.</p>';
-        return;
-    }
+            const grid = document.getElementById('grid-productos');
+            grid.innerHTML = '';
+            
+            if (!lista || lista.length === 0) {
+                grid.innerHTML = '<p style="color: #111111; font-weight: bold; text-align: center; width: 100%;">No hay productos en esta categoría.</p>';
+                return;
+            }
 
-    lista.forEach(p => {
-        grid.innerHTML += `
-            <div class="producto-card">
-                <img src="${p.imagen}" alt="${p.nombre}" onerror="this.src='https://cdn-icons-png.flaticon.com/512/628/628283.png'">
-                
-                <h4 style="color: #111111; margin: 10px 0 5px 0; font-size: 1.1em; font-weight: bold;">
-                    ${p.nombre}
-                </h4>
-                
-                <p style="margin: 5px 0 10px 0; font-size: 1.05em;">
-                    <strong style="color: #111111;">$${p.precio.toLocaleString('es-CL')}</strong>
-                </p>
-                
-                <button onclick="agregarAlCarrito(${p.id})" style="cursor: pointer;">
-                    Agregar
-                </button>
-            </div>
-        `;
-    });
-}
+            lista.forEach(p => {
+                grid.innerHTML += `
+                    <div class="producto-card">
+                        <img src="${p.imagen}" alt="${p.nombre}" onerror="this.src='https://cdn-icons-png.flaticon.com/512/628/628283.png'">
+                        
+                        <h4 style="color: #111111; margin: 10px 0 5px 0; font-size: 1.1em; font-weight: bold;">
+                            ${p.nombre}
+                        </h4>
+                        
+                        <p style="margin: 5px 0 10px 0; font-size: 1.05em;">
+                            <strong style="color: #111111;">$${p.precio.toLocaleString('es-CL')}</strong>
+                        </p>
+                        
+                        <button onclick="agregarAlCarrito(${p.id})" style="cursor: pointer;">
+                            Agregar
+                        </button>
+                    </div>
+                `;
+            });
+        }
 
         function filtrarProductos(categoria) {
             if (categoria === 'todos') {
@@ -172,7 +241,7 @@
             const totalHTML = document.getElementById('total-precio');
             
             if (carrito.length === 0) {
-                contenedorHTML.innerHTML = '<p>El carrito está vacío.</p>';
+                contenedorHTML.innerHTML = '<p style="color: #111111;">El carrito está vacío.</p>';
                 totalHTML.innerText = '0';
                 return;
             }
@@ -184,7 +253,7 @@
                 total += item.precio * item.cantidad;
                 contenedorHTML.innerHTML += `
                     <div class="item-carrito">
-                        <span>${item.nombre} (x${item.cantidad})</span>
+                        <span style="color: #111111;">${item.nombre} (x${item.cantidad})</span>
                         <div>
                             <button onclick="cambiarCantidad(${item.id}, 1)">+</button>
                             <button onclick="cambiarCantidad(${item.id}, -1)">-</button>
