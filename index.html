@@ -106,25 +106,35 @@
         const WHATSAPP_DANIELA = "56966956878";
 
         function mostrarProductos(lista) {
-            const grid = document.getElementById('grid-productos');
-            grid.innerHTML = '';
-            
-            if (!lista || lista.length === 0) {
-                grid.innerHTML = '<p>No hay productos en esta categoría.</p>';
-                return;
-            }
+    const grid = document.getElementById('grid-productos');
+    grid.innerHTML = '';
+    
+    if (!lista || lista.length === 0) {
+        // Forzamos también a que este mensaje de alerta sea negro y visible
+        grid.innerHTML = '<p style="color: #111111; font-weight: bold; text-align: center; width: 100%;">No hay productos en esta categoría.</p>';
+        return;
+    }
 
-            lista.forEach(p => {
-                grid.innerHTML += `
-                    <div class="producto-card">
-                        <img src="${p.imagen}" alt="${p.nombre}" onerror="this.src='https://cdn-icons-png.flaticon.com/512/628/628283.png'">
-                        <h4>${p.nombre}</h4>
-                        <p><strong>$${p.precio.toLocaleString('es-CL')}</strong></p>
-                        <button onclick="agregarAlCarrito(${p.id})">Agregar</button>
-                    </div>
-                `;
-            });
-        }
+    lista.forEach(p => {
+        grid.innerHTML += `
+            <div class="producto-card">
+                <img src="${p.imagen}" alt="${p.nombre}" onerror="this.src='https://cdn-icons-png.flaticon.com/512/628/628283.png'">
+                
+                <h4 style="color: #111111; margin: 10px 0 5px 0; font-size: 1.1em; font-weight: bold;">
+                    ${p.nombre}
+                </h4>
+                
+                <p style="margin: 5px 0 10px 0; font-size: 1.05em;">
+                    <strong style="color: #111111;">$${p.precio.toLocaleString('es-CL')}</strong>
+                </p>
+                
+                <button onclick="agregarAlCarrito(${p.id})" style="cursor: pointer;">
+                    Agregar
+                </button>
+            </div>
+        `;
+    });
+}
 
         function filtrarProductos(categoria) {
             if (categoria === 'todos') {
