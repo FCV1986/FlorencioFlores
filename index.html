@@ -23,9 +23,12 @@
     </header>
 
     <div class="filtros" id="filtros-menu">
-        <button onclick="mostrarProductos(productos)">Todos</button>
-        <button onclick="mostrarProductos(productos.filter(p => p.categoria === 'hortalizas'))">Hortalizas</button>
-        <button onclick="mostrarProductos(productos.filter(p => p.categoria === 'flores'))">Flores</button>
+    <button onclick="mostrarProductos(productos)">Todos</button>
+    <button onclick="mostrarProductos(productos.filter(p => p.categoria === 'hortalizas'))">Hortalizas</button>
+    <button onclick="mostrarProductos(productos.filter(p => p.categoria === 'flores'))">Flores</button>
+    
+    <button onclick="mostrarProductos(productos.filter(p => p.categoria === 'legumbres'))">Legumbres y Varios</button>
+</div>
     </div>
 
     <div class="contenedor">
