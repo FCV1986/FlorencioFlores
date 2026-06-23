@@ -38,16 +38,26 @@
             const grid = document.getElementById('grid');
             grid.innerHTML = '';
             lista.forEach(p => {
-                grid.innerHTML += `<div class="card"><img src="${p.img}" onerror="this.style.display='none'"><h3>${p.nombre}</h3><button>Agregar</button></div>`;
+                grid.innerHTML += `<div class="card">
+                    <img src="${p.img}" onerror="this.style.display='none'">
+                    <h3>${p.nombre}</h3>
+                    <button>Agregar</button>
+                </div>`;
             });
         }
 
+        // --- ESTA ES LA PARTE QUE TE FALTA ---
         function filtrar(cat) {
-            if(cat === 'todos') render(productos);
-            else render(productos.filter(p => p.cat === cat));
+            if(cat === 'todos') {
+                render(productos);
+            } else {
+                const filtrados = productos.filter(p => p.categoria === cat);
+                render(filtrados);
+            }
         }
 
-        render(productos); // Carga inicial
+        // Carga inicial para que no aparezca vacío al abrir
+        render(productos);
     </script>
 </body>
 </html>
