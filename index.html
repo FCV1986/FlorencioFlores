@@ -11,33 +11,22 @@
         .producto-card { border: 2px solid #2ecc11; padding: 10px; border-radius: 8px; text-align: center; }
         .producto-card img { max-width: 100%; height: 150px; object-fit: cover; }
         .carrito-seccion { flex: 1; border-left: 2px solid #2ecc11; padding-left: 20px; position: sticky; top: 20px; }
-        button {
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.1s;
-}
-
-button:hover {
-    background-color: #2ecc11;
-    color: white;
-}
-
-button:active {
-    background-color: #27ae60; /* Un verde un poquito más oscuro */
-    transform: scale(0.95);
-}       
+        button { cursor: pointer; transition: background-color 0.3s, transform 0.1s; }
+        button:hover { background-color: #2ecc11; color: white; }
+        button:active { background-color: #27ae60; transform: scale(0.95); }
     </style>
 </head>
 <body>
 
     <header style="text-align:center;">
         <h1>Florencio Flores</h1>
-    <div id="filtros">
-        <button onclick="mostrarProductos('todos')">Todos</button>
-        <button onclick="mostrarProductos('hortalizas')">Hortalizas</button>
-        <button onclick="mostrarProductos('flores')">Flores</button>
-        <button onclick="mostrarProductos('legumbres')">Legumbres y Varios</button>
-        <button onclick="mostrarProductos('semillas')">Semillas en Bolsas</button>
-    </div>
+        <div id="filtros">
+            <button onclick="mostrarProductos('todos')">Todos</button>
+            <button onclick="mostrarProductos('hortalizas')">Hortalizas</button>
+            <button onclick="mostrarProductos('flores')">Flores</button>
+            <button onclick="mostrarProductos('legumbres')">Legumbres y Varios</button>
+            <button onclick="mostrarProductos('semillas')">Semillas en Bolsas</button>
+        </div>
     </header>
 
     <div class="contenedor" style="margin-top:20px;">
@@ -53,7 +42,6 @@ button:active {
 
     <script>
         const productos = [
-            // Hortalizas
             { id: 1, nombre: "Acelga Tallo Naranjo", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/acelga_tallo_naranjo.png" },
             { id: 2, nombre: "Achicoria", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/achicoria.jpg" },
             { id: 3, nombre: "Ají Cacho de Cabra", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/aji_cacho.jpg" },
@@ -103,7 +91,6 @@ button:active {
             { id: 49, nombre: "Zapallo Italiano Ama.", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/zapallo_italiano_amarillo.png" },
             { id: 50, nombre: "Zapallo Italiano Bola 8", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/zapallo_italiano_bola8.png" },
             { id: 51, nombre: "Zapallo Italiano Gris", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/zapallo_italiano_gris.jpg" },
-            // Flores
             { id: 101, nombre: "Alegría del hogar", categoria: "flores", precio: 1000, imagen: "foto_flores/alegria_del_hogar.jpg" },
             { id: 102, nombre: "Amapolas doble", categoria: "flores", precio: 1000, imagen: "foto_flores/amapolas_doble.jpg" },
             { id: 103, nombre: "Borraja", categoria: "flores", precio: 1000, imagen: "foto_flores/borraja.jpg" },
@@ -132,7 +119,6 @@ button:active {
             { id: 126, nombre: "Reina Luisa doble", categoria: "flores", precio: 1000, imagen: "foto_flores/reina_luisa_doble.jpg" },
             { id: 127, nombre: "Reina Luisa matsumoto", categoria: "flores", precio: 1000, imagen: "foto_flores/reina_luisa_matsumoto.jpg" },
             { id: 128, nombre: "Suspiros", categoria: "flores", precio: 1000, imagen: "foto_flores/suspiros.png" },
-            // Legumbres
             { id: 201, nombre: "Alcayota", categoria: "legumbres", precio: 1000, imagen: "foto_porotos/alcayota.jpg" },
             { id: 202, nombre: "Arveja de mata", categoria: "legumbres", precio: 1000, imagen: "foto_porotos/arveja_de_mata.jpg" },
             { id: 203, nombre: "Arveja sin hila", categoria: "legumbres", precio: 1000, imagen: "foto_porotos/arveja_sin-hila.jpg" },
@@ -153,7 +139,6 @@ button:active {
             { id: 218, nombre: "Poroto rubí", categoria: "legumbres", precio: 1000, imagen: "foto_porotos/poroto_rubi.jpg" },
             { id: 219, nombre: "Poroto señorita", categoria: "legumbres", precio: 1000, imagen: "foto_porotos/poroto_senorita.jpg" },
             { id: 220, nombre: "Poroto sofía", categoria: "legumbres", precio: 1000, imagen: "foto_porotos/poroto_sofia.jpg" },
-            // Semillas
             { id: 301, nombre: "Albahaca Morada", categoria: "semillas", precio: 1000, imagen: "foto_bolsas_con_semillas_de_hortalizas/albahaca-morada.jpg" },
             { id: 302, nombre: "Alcaparra", categoria: "semillas", precio: 1000, imagen: "foto_bolsas_con_semillas_de_hortalizas/alcaparra.webp" },
             { id: 303, nombre: "Betarraga", categoria: "semillas", precio: 1000, imagen: "foto_bolsas_con_semillas_de_hortalizas/betarraga.webp" },
@@ -191,26 +176,20 @@ button:active {
                         <h4>${p.nombre}</h4>
                         <button onclick="agregarAlCarrito(${p.id})">Agregar</button>
                     </div>`;
-                
-                    function agregarAlCarrito(id) {
+            });
+        }
+
+        function agregarAlCarrito(id) {
             const prod = productos.find(p => p.id === id);
             carrito.push(prod);
             actualizarCarrito();
-        
-            // Nueva URL de tu Apps Script
-            let url = 'https://script.google.com/macros/s/AKfycbzBVUR-LlhdxNlqhf-QSZePnliYLTdNQc4NjCcY8xB8cTLCL6DS62D1N_PWnU8_c2Ut/exec';
-            
-            // Construimos la URL con los datos
-            let fullUrl = url + `?producto=${encodeURIComponent(prod.nombre)}&categoria=${encodeURIComponent(prod.categoria)}&precio=${prod.precio}`;
-        
-            // Enviamos el dato
+
+            const url = 'https://script.google.com/macros/s/AKfycbzBVUR-LlhdxNlqhf-QSZePnliYLTdNQc4NjCcY8xB8cTLCL6DS62D1N_PWnU8_c2Ut/exec';
+            const fullUrl = `${url}?producto=${encodeURIComponent(prod.nombre)}&categoria=${encodeURIComponent(prod.categoria)}&precio=${prod.precio}`;
+
             fetch(fullUrl, { method: 'GET' })
-            .then(response => {
-                console.log("¡Dato enviado a tu planilla!");
-            })
-            .catch(error => {
-                console.error("Error al enviar el dato:", error);
-            });
+            .then(() => console.log("¡Dato enviado con éxito a la planilla!"))
+            .catch(error => console.error("Error al enviar:", error));
         }
 
         function actualizarCarrito() {
