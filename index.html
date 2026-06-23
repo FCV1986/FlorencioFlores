@@ -2,7 +2,6 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catálogo Florencio Flores</title>
     <style>
         body { max-width: 1200px; margin: 0 auto; padding: 20px; font-family: sans-serif; }
@@ -11,21 +10,18 @@
         .producto-card { border: 2px solid #2ecc11; padding: 10px; border-radius: 8px; text-align: center; }
         .producto-card img { max-width: 100%; height: 150px; object-fit: cover; }
         .carrito-seccion { flex: 1; border-left: 2px solid #2ecc11; padding-left: 20px; position: sticky; top: 20px; }
-        button { cursor: pointer; transition: background-color 0.3s, transform 0.1s; }
-        button:hover { background-color: #2ecc11; color: white; }
-        button:active { background-color: #27ae60; transform: scale(0.95); }
+        button { cursor: pointer; padding: 8px; }
     </style>
 </head>
 <body>
-
     <header style="text-align:center;">
         <h1>Florencio Flores</h1>
         <div id="filtros">
             <button onclick="mostrarProductos('todos')">Todos</button>
             <button onclick="mostrarProductos('hortalizas')">Hortalizas</button>
             <button onclick="mostrarProductos('flores')">Flores</button>
-            <button onclick="mostrarProductos('legumbres')">Legumbres y Varios</button>
-            <button onclick="mostrarProductos('semillas')">Semillas en Bolsas</button>
+            <button onclick="mostrarProductos('legumbres')">Legumbres</button>
+            <button onclick="mostrarProductos('semillas')">Semillas</button>
         </div>
     </header>
 
@@ -36,131 +32,131 @@
             <div id="items-carrito">El carrito está vacío.</div>
             <hr>
             <h3>Total: $<span id="total-precio">0</span></h3>
-            <button onclick="enviarWhatsApp()" style="background:#25d366; color:white; border:none; padding:10px; cursor:pointer;">Confirmar Pedido</button>
+            <button onclick="enviarWhatsApp()" style="background:#25d366; color:white; border:none; width:100%;">Confirmar Pedido</button>
         </aside>
     </div>
 
     <script>
         const productos = [
-            { id: 1, nombre: "Acelga Tallo Naranjo", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/acelga_tallo_naranjo.png" },
-            { id: 2, nombre: "Achicoria", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/achicoria.jpg" },
-            { id: 3, nombre: "Ají Cacho de Cabra", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/aji_cacho.jpg" },
-            { id: 4, nombre: "Ají Cristal", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/aji_cristal.jpeg" },
-            { id: 5, nombre: "Ají Habanero", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/aji_habanero.png" },
-            { id: 6, nombre: "Ají Jalapeño", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/aji_jalapeno.png" },
-            { id: 7, nombre: "Amaranto", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/amaranto.jpg" },
-            { id: 8, nombre: "Apio", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/apio.jpg" },
-            { id: 9, nombre: "Berenjena", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/berenjena.png" },
-            { id: 10, nombre: "Berro", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/berro.jpg" },
-            { id: 11, nombre: "Brócoli", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/brocoli.jpg" },
-            { id: 12, nombre: "Cebolla Texas", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/cebolla_texas.png" },
-            { id: 13, nombre: "Cebolla Morada", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/cebolla_morada.jpg" },
-            { id: 15, nombre: "Col China", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/col_china.jpg" },
-            { id: 16, nombre: "Coliflor", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/coliflor.jpg" },
-            { id: 17, nombre: "Coliflor Romanesco", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/coliflor_romanesco.gif" },
-            { id: 18, nombre: "Kale Crespo", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/kale_crespo.png" },
-            { id: 19, nombre: "Kale Rizado", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/kale_rizado.jpg" },
-            { id: 20, nombre: "Kale Toscano", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/kale_toscano.jpg" },
-            { id: 21, nombre: "Kale 2", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/kale_2.webp" },
-            { id: 22, nombre: "Lechuga Catalogna Roja", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/lechuga_catalogna_roja.png" },
-            { id: 23, nombre: "Lechuga Lollo Rosa", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/lechuga_lollo_rosa.jpg" },
-            { id: 24, nombre: "Lechuga Lunanera", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/lechuga_lunanera.png" },
-            { id: 25, nombre: "Lechuga Matrioska", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/lechuga_matrioska.jpg" },
-            { id: 26, nombre: "Lechuga Red Salad Bowl", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/lechuga_red_salad_bowl.png" },
-            { id: 27, nombre: "Melón Calameño", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/melon_calameno.jpg" },
-            { id: 28, nombre: "Melón Tuna", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/melon_tuna.png" },
-            { id: 29, nombre: "Mizuna Roja", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/mizuna_roja.jpg" },
-            { id: 30, nombre: "Mizuna Verde", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/mizuna_verde.jpg" },
-            { id: 31, nombre: "Mostaza", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/mostaza.png" },
-            { id: 32, nombre: "Nabo", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/nabo.jpg" },
-            { id: 33, nombre: "Okra", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/okra.jpg" },
-            { id: 34, nombre: "Pak Choi Rojo", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/pak_choi_rojo.png" },
-            { id: 35, nombre: "Pak Choi Verde", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/pak_choi_verde.png" },
-            { id: 36, nombre: "Perejil Crespo", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/perejil_crespo.jpg" },
-            { id: 37, nombre: "Pimentón Amarillo", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/pimiento_amarillo.jpg" },
-            { id: 38, nombre: "Pimentón Rojo", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/pimenton_rojo.jpg" },
-            { id: 40, nombre: "Repollo de Bruselas", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/buselas.png" },
-            { id: 41, nombre: "Rúcula", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/rucula.jpg" },
-            { id: 42, nombre: "Sandía Antonia", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/sandia_antonia.png" },
-            { id: 43, nombre: "Sandía Klondike", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/sandia_klondike.png" },
-            { id: 44, nombre: "Tatsoi", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/tatsoi.png" },
-            { id: 45, nombre: "Tomate Amarillo", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/tomate_amarillo.png" },
-            { id: 46, nombre: "Tomate Cal Ace", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/tomate_cal_ace.jpg" },
-            { id: 47, nombre: "Tomate Rosado", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/tomate_rosado.jpg" },
-            { id: 48, nombre: "Zapallo Butternut", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/zapallo_butternut.png" },
-            { id: 49, nombre: "Zapallo Italiano Ama.", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/zapallo_italiano_amarillo.png" },
-            { id: 50, nombre: "Zapallo Italiano Bola 8", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/zapallo_italiano_bola8.png" },
-            { id: 51, nombre: "Zapallo Italiano Gris", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/zapallo_italiano_gris.jpg" },
-            { id: 101, nombre: "Alegría del hogar", categoria: "flores", precio: 1000, imagen: "foto_flores/alegria_del_hogar.jpg" },
-            { id: 102, nombre: "Amapolas doble", categoria: "flores", precio: 1000, imagen: "foto_flores/amapolas_doble.jpg" },
-            { id: 103, nombre: "Borraja", categoria: "flores", precio: 1000, imagen: "foto_flores/borraja.jpg" },
-            { id: 104, nombre: "Cactus y suculentas", categoria: "flores", precio: 1000, imagen: "foto_flores/cactus_y_suculentas.png" },
-            { id: 105, nombre: "Calendulas", categoria: "flores", precio: 1000, imagen: "foto_flores/calendulas.png" },
-            { id: 106, nombre: "Cartuchos", categoria: "flores", precio: 1000, imagen: "foto_flores/cartuchos.png" },
-            { id: 107, nombre: "Celosia cresta de gallo", categoria: "flores", precio: 1000, imagen: "foto_flores/celosia_cresta_de_gallo.jpg" },
-            { id: 108, nombre: "Celosia plumosa", categoria: "flores", precio: 1000, imagen: "foto_flores/celosia_plumosa.jpg" },
-            { id: 109, nombre: "Clavel gigante", categoria: "flores", precio: 1000, imagen: "foto_flores/clavel_gigante.jpg" },
-            { id: 110, nombre: "Clavelina china", categoria: "flores", precio: 1000, imagen: "foto_flores/clavelina_china.jpg" },
-            { id: 111, nombre: "Clavelina japonesa", categoria: "flores", precio: 1000, imagen: "foto_flores/clavelina_japonesa.jpg" },
-            { id: 112, nombre: "Clavel lanudo", categoria: "flores", precio: 1000, imagen: "foto_flores/clavel_lanudo.jpg" },
-            { id: 113, nombre: "Clavelon enano", categoria: "flores", precio: 1000, imagen: "foto_flores/clavelon_enano.jpg" },
-            { id: 114, nombre: "Cosmos sensación", categoria: "flores", precio: 1000, imagen: "foto_flores/cosmos_sensacion.jpg" },
-            { id: 115, nombre: "Crisantemos variados", categoria: "flores", precio: 1000, imagen: "foto_flores/crisantemos_variados.jpg" },
-            { id: 116, nombre: "Dalia cactus", categoria: "flores", precio: 1000, imagen: "foto_flores/dalia_cactus.jpg" },
-            { id: 117, nombre: "Dalia enana", categoria: "flores", precio: 1000, imagen: "foto_flores/dalia_enana.jpg" },
-            { id: 118, nombre: "Gazanias mixtas", categoria: "flores", precio: 1000, imagen: "foto_flores/gazanias_mixtas.jpg" },
-            { id: 119, nombre: "Girasol amarillo", categoria: "flores", precio: 1000, imagen: "foto_flores/girasol_amarillo.jpg" },
-            { id: 120, nombre: "Ilusión paniculata", categoria: "flores", precio: 1000, imagen: "foto_flores/ilusion_paniculata.jpg" },
-            { id: 121, nombre: "Malva mixta", categoria: "flores", precio: 1000, imagen: "foto_flores/malva_mixta.png" },
-            { id: 122, nombre: "Manzanilla", categoria: "flores", precio: 1000, imagen: "foto_flores/manzanilla.jpg" },
-            { id: 123, nombre: "Margarita africana", categoria: "flores", precio: 1000, imagen: "foto_flores/margarita_africana.jpg" },
-            { id: 124, nombre: "Petunia colorama", categoria: "flores", precio: 1000, imagen: "foto_flores/petunia_colorama.png" },
-            { id: 125, nombre: "Reina Luisa americana", categoria: "flores", precio: 1000, imagen: "foto_flores/reina_luisa_americana.jpg" },
-            { id: 126, nombre: "Reina Luisa doble", categoria: "flores", precio: 1000, imagen: "foto_flores/reina_luisa_doble.jpg" },
-            { id: 127, nombre: "Reina Luisa matsumoto", categoria: "flores", precio: 1000, imagen: "foto_flores/reina_luisa_matsumoto.jpg" },
-            { id: 128, nombre: "Suspiros", categoria: "flores", precio: 1000, imagen: "foto_flores/suspiros.png" },
-            { id: 201, nombre: "Alcayota", categoria: "legumbres", precio: 1000, imagen: "foto_porotos/alcayota.jpg" },
-            { id: 202, nombre: "Arveja de mata", categoria: "legumbres", precio: 1000, imagen: "foto_porotos/arveja_de_mata.jpg" },
-            { id: 203, nombre: "Arveja sin hila", categoria: "legumbres", precio: 1000, imagen: "foto_porotos/arveja_sin-hila.jpg" },
-            { id: 204, nombre: "Arvejón de guía", categoria: "legumbres", precio: 1000, imagen: "foto_porotos/arvejon_de_guia.jpg" },
-            { id: 205, nombre: "Arvejón mata", categoria: "legumbres", precio: 1000, imagen: "foto_porotos/arvejon_mata.jpg" },
-            { id: 206, nombre: "Ballica", categoria: "legumbres", precio: 1000, imagen: "foto_porotos/ballica.jpg" },
-            { id: 207, nombre: "Cilantro Moggiano", categoria: "legumbres", precio: 1000, imagen: "foto_porotos/cilantro_moggiano.jpg" },
-            { id: 208, nombre: "Cilantro santo", categoria: "legumbres", precio: 1000, imagen: "foto_porotos/cilantro_santo.jpg" },
-            { id: 209, nombre: "Habas agua dulce", categoria: "legumbres", precio: 1000, imagen: "foto_porotos/habas_agua_dulce.jpg" },
-            { id: 210, nombre: "Habas verdes", categoria: "legumbres", precio: 1000, imagen: "foto_porotos/habas_verdes.png" },
-            { id: 211, nombre: "Maíz 12 hileras", categoria: "legumbres", precio: 1000, imagen: "foto_porotos/maiz_12_hileras.jpg" },
-            { id: 212, nombre: "Maíz dulce", categoria: "legumbres", precio: 1000, imagen: "foto_porotos/maiz_dulce.jpg" },
-            { id: 213, nombre: "Poroto araucano", categoria: "legumbres", precio: 1000, imagen: "foto_porotos/poroto_araucano.jpg" },
-            { id: 214, nombre: "Poroto brío", categoria: "legumbres", precio: 1000, imagen: "foto_porotos/poroto_brio.jpg" },
-            { id: 215, nombre: "Poroto magnum", categoria: "legumbres", precio: 1000, imagen: "foto_porotos/poroto_magnum.jpg" },
-            { id: 216, nombre: "Poroto manteca", categoria: "legumbres", precio: 1000, imagen: "foto_porotos/poroto_manteca.jpg" },
-            { id: 217, nombre: "Poroto pallares", categoria: "legumbres", precio: 1000, imagen: "foto_porotos/poroto_pallares.jpg" },
-            { id: 218, nombre: "Poroto rubí", categoria: "legumbres", precio: 1000, imagen: "foto_porotos/poroto_rubi.jpg" },
-            { id: 219, nombre: "Poroto señorita", categoria: "legumbres", precio: 1000, imagen: "foto_porotos/poroto_senorita.jpg" },
-            { id: 220, nombre: "Poroto sofía", categoria: "legumbres", precio: 1000, imagen: "foto_porotos/poroto_sofia.jpg" },
-            { id: 301, nombre: "Albahaca Morada", categoria: "semillas", precio: 1000, imagen: "foto_bolsas_con_semillas_de_hortalizas/albahaca-morada.jpg" },
-            { id: 302, nombre: "Alcaparra", categoria: "semillas", precio: 1000, imagen: "foto_bolsas_con_semillas_de_hortalizas/alcaparra.webp" },
-            { id: 303, nombre: "Betarraga", categoria: "semillas", precio: 1000, imagen: "foto_bolsas_con_semillas_de_hortalizas/betarraga.webp" },
-            { id: 304, nombre: "Calabaza Mate", categoria: "semillas", precio: 1000, imagen: "foto_bolsas_con_semillas_de_hortalizas/calabaza_mate.jpg" },
-            { id: 305, nombre: "Ciboulette Fino", categoria: "semillas", precio: 1000, imagen: "foto_bolsas_con_semillas_de_hortalizas/ciboulette_fino.webp" },
-            { id: 306, nombre: "Hinojo", categoria: "semillas", precio: 1000, imagen: "foto_bolsas_con_semillas_de_hortalizas/hinojo.jpg" },
-            { id: 307, nombre: "Lechuga Batavia", categoria: "semillas", precio: 1000, imagen: "foto_bolsas_con_semillas_de_hortalizas/lechuga_batavia.png" },
-            { id: 308, nombre: "Lechuga Crespa Verde", categoria: "semillas", precio: 1000, imagen: "foto_bolsas_con_semillas_de_hortalizas/lechuga_crespa_verde.jpg" },
-            { id: 309, nombre: "Lechuga Maravilla de Verano", categoria: "semillas", precio: 1000, imagen: "foto_bolsas_con_semillas_de_hortalizas/lechuga_maravilla_de_verano.jpg" },
-            { id: 310, nombre: "Lechuga Reina de Mayo", categoria: "semillas", precio: 1000, imagen: "foto_bolsas_con_semillas_de_hortalizas/lechuga_reina_de_mayo.jpg" },
-            { id: 311, nombre: "Mastuerzo", categoria: "semillas", precio: 1000, imagen: "foto_bolsas_con_semillas_de_hortalizas/mastuerzo.jpg" },
-            { id: 312, nombre: "Pepino Alaska", categoria: "semillas", precio: 1000, imagen: "foto_bolsas_con_semillas_de_hortalizas/pepino_alaska.webp" },
-            { id: 313, nombre: "Pepino Ensalada", categoria: "semillas", precio: 1000, imagen: "foto_bolsas_con_semillas_de_hortalizas/pepino_ensalada.webp" },
-            { id: 314, nombre: "Perejil Liso", categoria: "semillas", precio: 1000, imagen: "foto_bolsas_con_semillas_de_hortalizas/perejil_liso.png" },
-            { id: 315, nombre: "Rabanitos", categoria: "semillas", precio: 1000, imagen: "foto_bolsas_con_semillas_de_hortalizas/rabanitos.webp" },
-            { id: 316, nombre: "Repollo Morado", categoria: "semillas", precio: 1000, imagen: "foto_bolsas_con_semillas_de_hortalizas/repollo_morado.jpg" },
-            { id: 317, nombre: "Repollo Verde", categoria: "semillas", precio: 1000, imagen: "foto_bolsas_con_semillas_de_hortalizas/repollo_verde.jpg" },
-            { id: 318, nombre: "Tomillo Chascudo", categoria: "semillas", precio: 1000, imagen: "foto_bolsas_con_semillas_de_hortalizas/tomillo_chascudo.png" },
-            { id: 319, nombre: "Zanahoria Redonda", categoria: "semillas", precio: 1000, imagen: "foto_bolsas_con_semillas_de_hortalizas/zanahoria_redonda.jpg" },
-            { id: 320, nombre: "Zanahoria", categoria: "semillas", precio: 1000, imagen: "foto_bolsas_con_semillas_de_hortalizas/zanahoria.webp" },
-            { id: 321, nombre: "Zapallo Camote", categoria: "semillas", precio: 1000, imagen: "foto_bolsas_con_semillas_de_hortalizas/zapallo_camote.png" },
-            { id: 322, nombre: "Zapallo Halloween", categoria: "semillas", precio: 1000, imagen: "foto_bolsas_con_semillas_de_hortalizas/zapallo_halloween.jpg" }
+            { id: 1, nombre: "Acelga Tallo Naranjo", categoria: "hortalizas", precio: 1000 },
+            { id: 2, nombre: "Achicoria", categoria: "hortalizas", precio: 1000 },
+            { id: 3, nombre: "Ají Cacho de Cabra", categoria: "hortalizas", precio: 1000 },
+            { id: 4, nombre: "Ají Cristal", categoria: "hortalizas", precio: 1000 },
+            { id: 5, nombre: "Ají Habanero", categoria: "hortalizas", precio: 1000 },
+            { id: 6, nombre: "Ají Jalapeño", categoria: "hortalizas", precio: 1000 },
+            { id: 7, nombre: "Amaranto", categoria: "hortalizas", precio: 1000 },
+            { id: 8, nombre: "Apio", categoria: "hortalizas", precio: 1000 },
+            { id: 9, nombre: "Berenjena", categoria: "hortalizas", precio: 1000 },
+            { id: 10, nombre: "Berro", categoria: "hortalizas", precio: 1000 },
+            { id: 11, nombre: "Brócoli", categoria: "hortalizas", precio: 1000 },
+            { id: 12, nombre: "Cebolla Texas", categoria: "hortalizas", precio: 1000 },
+            { id: 13, nombre: "Cebolla Morada", categoria: "hortalizas", precio: 1000 },
+            { id: 15, nombre: "Col China", categoria: "hortalizas", precio: 1000 },
+            { id: 16, nombre: "Coliflor", categoria: "hortalizas", precio: 1000 },
+            { id: 17, nombre: "Coliflor Romanesco", categoria: "hortalizas", precio: 1000 },
+            { id: 18, nombre: "Kale Crespo", categoria: "hortalizas", precio: 1000 },
+            { id: 19, nombre: "Kale Rizado", categoria: "hortalizas", precio: 1000 },
+            { id: 20, nombre: "Kale Toscano", categoria: "hortalizas", precio: 1000 },
+            { id: 21, nombre: "Kale 2", categoria: "hortalizas", precio: 1000 },
+            { id: 22, nombre: "Lechuga Catalogna Roja", categoria: "hortalizas", precio: 1000 },
+            { id: 23, nombre: "Lechuga Lollo Rosa", categoria: "hortalizas", precio: 1000 },
+            { id: 24, nombre: "Lechuga Lunanera", categoria: "hortalizas", precio: 1000 },
+            { id: 25, nombre: "Lechuga Matrioska", categoria: "hortalizas", precio: 1000 },
+            { id: 26, nombre: "Lechuga Red Salad Bowl", categoria: "hortalizas", precio: 1000 },
+            { id: 27, nombre: "Melón Calameño", categoria: "hortalizas", precio: 1000 },
+            { id: 28, nombre: "Melón Tuna", categoria: "hortalizas", precio: 1000 },
+            { id: 29, nombre: "Mizuna Roja", categoria: "hortalizas", precio: 1000 },
+            { id: 30, nombre: "Mizuna Verde", categoria: "hortalizas", precio: 1000 },
+            { id: 31, nombre: "Mostaza", categoria: "hortalizas", precio: 1000 },
+            { id: 32, nombre: "Nabo", categoria: "hortalizas", precio: 1000 },
+            { id: 33, nombre: "Okra", categoria: "hortalizas", precio: 1000 },
+            { id: 34, nombre: "Pak Choi Rojo", categoria: "hortalizas", precio: 1000 },
+            { id: 35, nombre: "Pak Choi Verde", categoria: "hortalizas", precio: 1000 },
+            { id: 36, nombre: "Perejil Crespo", categoria: "hortalizas", precio: 1000 },
+            { id: 37, nombre: "Pimentón Amarillo", categoria: "hortalizas", precio: 1000 },
+            { id: 38, nombre: "Pimentón Rojo", categoria: "hortalizas", precio: 1000 },
+            { id: 40, nombre: "Repollo de Bruselas", categoria: "hortalizas", precio: 1000 },
+            { id: 41, nombre: "Rúcula", categoria: "hortalizas", precio: 1000 },
+            { id: 42, nombre: "Sandía Antonia", categoria: "hortalizas", precio: 1000 },
+            { id: 43, nombre: "Sandía Klondike", categoria: "hortalizas", precio: 1000 },
+            { id: 44, nombre: "Tatsoi", categoria: "hortalizas", precio: 1000 },
+            { id: 45, nombre: "Tomate Amarillo", categoria: "hortalizas", precio: 1000 },
+            { id: 46, nombre: "Tomate Cal Ace", categoria: "hortalizas", precio: 1000 },
+            { id: 47, nombre: "Tomate Rosado", categoria: "hortalizas", precio: 1000 },
+            { id: 48, nombre: "Zapallo Butternut", categoria: "hortalizas", precio: 1000 },
+            { id: 49, nombre: "Zapallo Italiano Ama.", categoria: "hortalizas", precio: 1000 },
+            { id: 50, nombre: "Zapallo Italiano Bola 8", categoria: "hortalizas", precio: 1000 },
+            { id: 51, nombre: "Zapallo Italiano Gris", categoria: "hortalizas", precio: 1000 },
+            { id: 101, nombre: "Alegría del hogar", categoria: "flores", precio: 1000 },
+            { id: 102, nombre: "Amapolas doble", categoria: "flores", precio: 1000 },
+            { id: 103, nombre: "Borraja", categoria: "flores", precio: 1000 },
+            { id: 104, nombre: "Cactus y suculentas", categoria: "flores", precio: 1000 },
+            { id: 105, nombre: "Calendulas", categoria: "flores", precio: 1000 },
+            { id: 106, nombre: "Cartuchos", categoria: "flores", precio: 1000 },
+            { id: 107, nombre: "Celosia cresta de gallo", categoria: "flores", precio: 1000 },
+            { id: 108, nombre: "Celosia plumosa", categoria: "flores", precio: 1000 },
+            { id: 109, nombre: "Clavel gigante", categoria: "flores", precio: 1000 },
+            { id: 110, nombre: "Clavelina china", categoria: "flores", precio: 1000 },
+            { id: 111, nombre: "Clavelina japonesa", categoria: "flores", precio: 1000 },
+            { id: 112, nombre: "Clavel lanudo", categoria: "flores", precio: 1000 },
+            { id: 113, nombre: "Clavelon enano", categoria: "flores", precio: 1000 },
+            { id: 114, nombre: "Cosmos sensación", categoria: "flores", precio: 1000 },
+            { id: 115, nombre: "Crisantemos variados", categoria: "flores", precio: 1000 },
+            { id: 116, nombre: "Dalia cactus", categoria: "flores", precio: 1000 },
+            { id: 117, nombre: "Dalia enana", categoria: "flores", precio: 1000 },
+            { id: 118, nombre: "Gazanias mixtas", categoria: "flores", precio: 1000 },
+            { id: 119, nombre: "Girasol amarillo", categoria: "flores", precio: 1000 },
+            { id: 120, nombre: "Ilusión paniculata", categoria: "flores", precio: 1000 },
+            { id: 121, nombre: "Malva mixta", categoria: "flores", precio: 1000 },
+            { id: 122, nombre: "Manzanilla", categoria: "flores", precio: 1000 },
+            { id: 123, nombre: "Margarita africana", categoria: "flores", precio: 1000 },
+            { id: 124, nombre: "Petunia colorama", categoria: "flores", precio: 1000 },
+            { id: 125, nombre: "Reina Luisa americana", categoria: "flores", precio: 1000 },
+            { id: 126, nombre: "Reina Luisa doble", categoria: "flores", precio: 1000 },
+            { id: 127, nombre: "Reina Luisa matsumoto", categoria: "flores", precio: 1000 },
+            { id: 128, nombre: "Suspiros", categoria: "flores", precio: 1000 },
+            { id: 201, nombre: "Alcayota", categoria: "legumbres", precio: 1000 },
+            { id: 202, nombre: "Arveja de mata", categoria: "legumbres", precio: 1000 },
+            { id: 203, nombre: "Arveja sin hila", categoria: "legumbres", precio: 1000 },
+            { id: 204, nombre: "Arvejón de guía", categoria: "legumbres", precio: 1000 },
+            { id: 205, nombre: "Arvejón mata", categoria: "legumbres", precio: 1000 },
+            { id: 206, nombre: "Ballica", categoria: "legumbres", precio: 1000 },
+            { id: 207, nombre: "Cilantro Moggiano", categoria: "legumbres", precio: 1000 },
+            { id: 208, nombre: "Cilantro santo", categoria: "legumbres", precio: 1000 },
+            { id: 209, nombre: "Habas agua dulce", categoria: "legumbres", precio: 1000 },
+            { id: 210, nombre: "Habas verdes", categoria: "legumbres", precio: 1000 },
+            { id: 211, nombre: "Maíz 12 hileras", categoria: "legumbres", precio: 1000 },
+            { id: 212, nombre: "Maíz dulce", categoria: "legumbres", precio: 1000 },
+            { id: 213, nombre: "Poroto araucano", categoria: "legumbres", precio: 1000 },
+            { id: 214, nombre: "Poroto brío", categoria: "legumbres", precio: 1000 },
+            { id: 215, nombre: "Poroto magnum", categoria: "legumbres", precio: 1000 },
+            { id: 216, nombre: "Poroto manteca", categoria: "legumbres", precio: 1000 },
+            { id: 217, nombre: "Poroto pallares", categoria: "legumbres", precio: 1000 },
+            { id: 218, nombre: "Poroto rubí", categoria: "legumbres", precio: 1000 },
+            { id: 219, nombre: "Poroto señorita", categoria: "legumbres", precio: 1000 },
+            { id: 220, nombre: "Poroto sofía", categoria: "legumbres", precio: 1000 },
+            { id: 301, nombre: "Albahaca Morada", categoria: "semillas", precio: 1000 },
+            { id: 302, nombre: "Alcaparra", categoria: "semillas", precio: 1000 },
+            { id: 303, nombre: "Betarraga", categoria: "semillas", precio: 1000 },
+            { id: 304, nombre: "Calabaza Mate", categoria: "semillas", precio: 1000 },
+            { id: 305, nombre: "Ciboulette Fino", categoria: "semillas", precio: 1000 },
+            { id: 306, nombre: "Hinojo", categoria: "semillas", precio: 1000 },
+            { id: 307, nombre: "Lechuga Batavia", categoria: "semillas", precio: 1000 },
+            { id: 308, nombre: "Lechuga Crespa Verde", categoria: "semillas", precio: 1000 },
+            { id: 309, nombre: "Lechuga Maravilla", categoria: "semillas", precio: 1000 },
+            { id: 310, nombre: "Lechuga Reina", categoria: "semillas", precio: 1000 },
+            { id: 311, nombre: "Mastuerzo", categoria: "semillas", precio: 1000 },
+            { id: 312, nombre: "Pepino Alaska", categoria: "semillas", precio: 1000 },
+            { id: 313, nombre: "Pepino Ensalada", categoria: "semillas", precio: 1000 },
+            { id: 314, nombre: "Perejil Liso", categoria: "semillas", precio: 1000 },
+            { id: 315, nombre: "Rabanitos", categoria: "semillas", precio: 1000 },
+            { id: 316, nombre: "Repollo Morado", categoria: "semillas", precio: 1000 },
+            { id: 317, nombre: "Repollo Verde", categoria: "semillas", precio: 1000 },
+            { id: 318, nombre: "Tomillo Chascudo", categoria: "semillas", precio: 1000 },
+            { id: 319, nombre: "Zanahoria Redonda", categoria: "semillas", precio: 1000 },
+            { id: 320, nombre: "Zanahoria", categoria: "semillas", precio: 1000 },
+            { id: 321, nombre: "Zapallo Camote", categoria: "semillas", precio: 1000 },
+            { id: 322, nombre: "Zapallo Halloween", categoria: "semillas", precio: 1000 }
         ];
 
         let carrito = [];
@@ -172,7 +168,6 @@
             lista.forEach(p => {
                 grid.innerHTML += `
                     <div class="producto-card">
-                        <img src="${p.imagen}" alt="${p.nombre}" onerror="this.src='https://cdn-icons-png.flaticon.com/512/628/628283.png'">
                         <h4>${p.nombre}</h4>
                         <button onclick="agregarAlCarrito(${p.id})">Agregar</button>
                     </div>`;
@@ -185,16 +180,13 @@
             actualizarCarrito();
 
             const url = 'https://script.google.com/macros/s/AKfycbzBVUR-LlhdxNlqhf-QSZePnliYLTdNQc4NjCcY8xB8cTLCL6DS62D1N_PWnU8_c2Ut/exec';
-            const fullUrl = `${url}?producto=${encodeURIComponent(prod.nombre)}&categoria=${encodeURIComponent(prod.categoria)}&precio=${prod.precio}`;
-
-            fetch(fullUrl, { method: 'GET' })
-            .then(() => console.log("¡Dato enviado con éxito a la planilla!"))
-            .catch(error => console.error("Error al enviar:", error));
+            fetch(`${url}?producto=${encodeURIComponent(prod.nombre)}&categoria=${encodeURIComponent(prod.categoria)}&precio=${prod.precio}`, { mode: 'no-cors' })
+            .then(() => console.log("Datos enviados"))
+            .catch(e => console.error("Error", e));
         }
 
         function actualizarCarrito() {
-            const cont = document.getElementById('items-carrito');
-            cont.innerHTML = carrito.map(i => `<div>${i.nombre}</div>`).join('');
+            document.getElementById('items-carrito').innerHTML = carrito.map(i => `<div>${i.nombre}</div>`).join('');
             document.getElementById('total-precio').innerText = (carrito.length * 1000);
         }
 
@@ -203,7 +195,7 @@
             window.open("https://wa.me/56966956878?text=" + encodeURIComponent(msg));
         }
 
-        window.onload = () => mostrarProductos('todos');
+        mostrarProductos('todos');
     </script>
 </body>
 </html>
