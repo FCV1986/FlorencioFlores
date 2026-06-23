@@ -12,7 +12,6 @@ const productos = [
     { nombre: "Brócoli", img: "brocoli.jpg" },
     { nombre: "Buselas", img: "buselas.png" },
     { nombre: "Cebolla Morada", img: "cebolla_morada.jpg" },
-    { nombre: "Cebolla Red", img: "cebolla_red.jpg" },
     { nombre: "Cebolla Texas", img: "cebolla_texas.png" },
     { nombre: "Col China", img: "col_china.jpg" },
     { nombre: "Coliflor", img: "coliflor.jpg" },
