@@ -179,10 +179,11 @@
             carrito.push(prod);
             actualizarCarrito();
 
-            const url = 'https://script.google.com/macros/s/AKfycbzBVUR-LlhdxNlqhf-QSZePnliYLTdNQc4NjCcY8xB8cTLCL6DS62D1N_PWnU8_c2Ut/exec';
+            const url = 'https://script.google.com/macros/s/AKfycbyVcwBgbGtXT9CcVvyhLvYleblwIx_W9iE1HLeUSLg-t81rDWX13800uE0DFiP45Ohu/exec';
+            
             fetch(`${url}?producto=${encodeURIComponent(prod.nombre)}&categoria=${encodeURIComponent(prod.categoria)}&precio=${prod.precio}`, { mode: 'no-cors' })
-            .then(() => console.log("Datos enviados"))
-            .catch(e => console.error("Error", e));
+            .then(() => console.log("Datos enviados a la planilla"))
+            .catch(e => console.error("Error al enviar", e));
         }
 
         function actualizarCarrito() {
