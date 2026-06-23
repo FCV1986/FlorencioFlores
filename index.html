@@ -7,192 +7,94 @@
     <style>
         body { font-family: sans-serif; max-width: 1200px; margin: 0 auto; padding: 20px; background-color: #f9fff9; }
         h1 { text-align: center; color: #2ecc11; }
-        .filtros { text-align: center; margin-bottom: 20px; }
-        button.btn-filtro { margin: 5px; padding: 8px 15px; cursor: pointer; background: #fff; border: 2px solid #2ecc11; border-radius: 4px; }
-        .contenedor { display: flex; gap: 20px; flex-wrap: wrap; }
-        .catalogo { flex: 3; display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px; }
+        .catalogo { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; }
         .producto-card { border: 2px solid #2ecc11; padding: 10px; border-radius: 8px; text-align: center; background: white; }
-        .producto-card img { width: 100%; height: 150px; object-fit: cover; border-radius: 4px; margin-bottom: 10px; background: #eee; }
-        .carrito-seccion { flex: 1; min-width: 250px; border-left: 2px solid #2ecc11; padding-left: 20px; position: sticky; top: 20px; }
-        button.btn-agregar { cursor: pointer; padding: 10px; background: #2ecc11; color: white; border: none; border-radius: 4px; width: 100%; margin-top: 5px; }
+        .producto-card img { width: 100%; height: 150px; object-fit: cover; border-radius: 4px; background: #eee; }
+        button { cursor: pointer; padding: 10px; background: #2ecc11; color: white; border: none; border-radius: 4px; width: 100%; margin-top: 10px; }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Florencio Flores</h1>
-        <div class="filtros">
-            <button class="btn-filtro" onclick="filtrar('todos')">Todos</button>
-            <button class="btn-filtro" onclick="filtrar('hortalizas')">Hortalizas</button>
-            <button class="btn-filtro" onclick="filtrar('flores')">Flores</button>
-            <button class="btn-filtro" onclick="filtrar('legumbres')">Legumbres</button>
-            <button class="btn-filtro" onclick="filtrar('semillas')">Semillas</button>
-        </div>
-    </header>
-
-    <div class="contenedor">
-        <main class="catalogo" id="grid"></main>
-        <aside class="carrito-seccion">
-            <h2>🛒 Tu Pedido</h2>
-            <div id="lista-carrito">El carrito está vacío.</div>
-            <hr>
-            <h3>Total: $<span id="total">0</span></h3>
-            <button class="btn-agregar" onclick="enviarWhatsApp()" style="background:#25d366;">Confirmar Pedido</button>
-        </aside>
-    </div>
+    <h1>Florencio Flores</h1>
+    <div class="catalogo" id="grid"></div>
 
     <script>
         const productos = [
-            { id: 1, nombre: "Acelga Tallo Naranjo", cat: "hortalizas", img: "acelga.jpg" },
-            { id: 2, nombre: "Achicoria", cat: "hortalizas", img: "achicoria.jpg" },
-            { id: 3, nombre: "Ají Cacho de Cabra", cat: "hortalizas", img: "aji_cacho.jpg" },
-            { id: 4, nombre: "Ají Cristal", cat: "hortalizas", img: "aji_cristal.jpg" },
-            { id: 5, nombre: "Ají Habanero", cat: "hortalizas", img: "aji_habanero.jpg" },
-            { id: 6, nombre: "Ají Jalapeño", cat: "hortalizas", img: "aji_jalapeno.jpg" },
-            { id: 7, nombre: "Amaranto", cat: "hortalizas", img: "amaranto.jpg" },
-            { id: 8, nombre: "Apio", cat: "hortalizas", img: "apio.jpg" },
-            { id: 9, nombre: "Berenjena", cat: "hortalizas", img: "berenjena.jpg" },
-            { id: 10, nombre: "Berro", cat: "hortalizas", img: "berro.jpg" },
-            { id: 11, nombre: "Brócoli", cat: "hortalizas", img: "brocoli.jpg" },
-            { id: 12, nombre: "Cebolla Texas", cat: "hortalizas", img: "cebolla.jpg" },
-            { id: 13, nombre: "Cebolla Morada", cat: "hortalizas", img: "cebolla_morada.jpg" },
-            { id: 15, nombre: "Col China", cat: "hortalizas", img: "col_china.jpg" },
-            { id: 16, nombre: "Coliflor", cat: "hortalizas", img: "coliflor.jpg" },
-            { id: 17, nombre: "Coliflor Romanesco", cat: "hortalizas", img: "romanesco.jpg" },
-            { id: 18, nombre: "Kale Crespo", cat: "hortalizas", img: "kale.jpg" },
-            { id: 19, nombre: "Kale Rizado", cat: "hortalizas", img: "kale_rizado.jpg" },
-            { id: 20, nombre: "Kale Toscano", cat: "hortalizas", img: "kale_toscano.jpg" },
-            { id: 21, nombre: "Kale 2", cat: "hortalizas", img: "kale2.jpg" },
-            { id: 22, nombre: "Lechuga Catalogna Roja", cat: "hortalizas", img: "lechuga_cat.jpg" },
-            { id: 23, nombre: "Lechuga Lollo Rosa", cat: "hortalizas", img: "lollo_rosa.jpg" },
-            { id: 24, nombre: "Lechuga Lunanera", cat: "hortalizas", img: "lunanera.jpg" },
-            { id: 25, nombre: "Lechuga Matrioska", cat: "hortalizas", img: "matrioska.jpg" },
-            { id: 26, nombre: "Lechuga Red Salad Bowl", cat: "hortalizas", img: "red_salad.jpg" },
-            { id: 27, nombre: "Melón Calameño", cat: "hortalizas", img: "melon_cal.jpg" },
-            { id: 28, nombre: "Melón Tuna", cat: "hortalizas", img: "melon_tuna.jpg" },
-            { id: 29, nombre: "Mizuna Roja", cat: "hortalizas", img: "mizuna_roja.jpg" },
-            { id: 30, nombre: "Mizuna Verde", cat: "hortalizas", img: "mizuna_verde.jpg" },
-            { id: 31, nombre: "Mostaza", cat: "hortalizas", img: "mostaza.jpg" },
-            { id: 32, nombre: "Nabo", cat: "hortalizas", img: "nabo.jpg" },
-            { id: 33, nombre: "Okra", cat: "hortalizas", img: "okra.jpg" },
-            { id: 34, nombre: "Pak Choi Rojo", cat: "hortalizas", img: "pakchoi_rojo.jpg" },
-            { id: 35, nombre: "Pak Choi Verde", cat: "hortalizas", img: "pakchoi_verde.jpg" },
-            { id: 36, nombre: "Perejil Crespo", cat: "hortalizas", img: "perejil.jpg" },
-            { id: 37, nombre: "Pimentón Amarillo", cat: "hortalizas", img: "pimenton_am.jpg" },
-            { id: 38, nombre: "Pimentón Rojo", cat: "hortalizas", img: "pimenton_rojo.jpg" },
-            { id: 40, nombre: "Repollo de Bruselas", cat: "hortalizas", img: "bruselas.jpg" },
-            { id: 41, nombre: "Rúcula", cat: "hortalizas", img: "rucula.jpg" },
-            { id: 42, nombre: "Sandía Antonia", cat: "hortalizas", img: "sandia.jpg" },
-            { id: 43, nombre: "Sandía Klondike", cat: "hortalizas", img: "sandia_klon.jpg" },
-            { id: 44, nombre: "Tatsoi", cat: "hortalizas", img: "tatsoi.jpg" },
-            { id: 45, nombre: "Tomate Amarillo", cat: "hortalizas", img: "tomate_am.jpg" },
-            { id: 46, nombre: "Tomate Cal Ace", cat: "hortalizas", img: "tomate_cal.jpg" },
-            { id: 47, nombre: "Tomate Rosado", cat: "hortalizas", img: "tomate_rosa.jpg" },
-            { id: 48, nombre: "Zapallo Butternut", cat: "hortalizas", img: "zapallo.jpg" },
-            { id: 49, nombre: "Zapallo Italiano Ama.", cat: "hortalizas", img: "zapallo_ital.jpg" },
-            { id: 50, nombre: "Zapallo Italiano Bola 8", cat: "hortalizas", img: "bola8.jpg" },
-            { id: 51, nombre: "Zapallo Italiano Gris", cat: "hortalizas", img: "gris.jpg" },
-            { id: 101, nombre: "Alegría del hogar", cat: "flores", img: "alegria.jpg" },
-            { id: 102, nombre: "Amapolas doble", cat: "flores", img: "amapola.jpg" },
-            { id: 103, nombre: "Borraja", cat: "flores", img: "borraja.jpg" },
-            { id: 104, nombre: "Cactus y suculentas", cat: "flores", img: "cactus.jpg" },
-            { id: 105, nombre: "Calendulas", cat: "flores", img: "calendula.jpg" },
-            { id: 106, nombre: "Cartuchos", cat: "flores", img: "cartucho.jpg" },
-            { id: 107, nombre: "Celosia cresta de gallo", cat: "flores", img: "celosia_cresta.jpg" },
-            { id: 108, nombre: "Celosia plumosa", cat: "flores", img: "celosia_plumosa.jpg" },
-            { id: 109, nombre: "Clavel gigante", cat: "flores", img: "clavel.jpg" },
-            { id: 110, nombre: "Clavelina china", cat: "flores", img: "clavelina_china.jpg" },
-            { id: 111, nombre: "Clavelina japonesa", cat: "flores", img: "clavelina_jap.jpg" },
-            { id: 112, nombre: "Clavel lanudo", cat: "flores", img: "clavel_lanudo.jpg" },
-            { id: 113, nombre: "Clavelon enano", cat: "flores", img: "clavelon.jpg" },
-            { id: 114, nombre: "Cosmos sensación", cat: "flores", img: "cosmos.jpg" },
-            { id: 115, nombre: "Crisantemos variados", cat: "flores", img: "crisantemos.jpg" },
-            { id: 116, nombre: "Dalia cactus", cat: "flores", img: "dalia_cactus.jpg" },
-            { id: 117, nombre: "Dalia enana", cat: "flores", img: "dalia_enana.jpg" },
-            { id: 118, nombre: "Gazanias mixtas", cat: "flores", img: "gazanias.jpg" },
-            { id: 119, nombre: "Girasol amarillo", cat: "flores", img: "girasol.jpg" },
-            { id: 120, nombre: "Ilusión paniculata", cat: "flores", img: "ilusion.jpg" },
-            { id: 121, nombre: "Malva mixta", cat: "flores", img: "malva.jpg" },
-            { id: 122, nombre: "Manzanilla", cat: "flores", img: "manzanilla.jpg" },
-            { id: 123, nombre: "Margarita africana", cat: "flores", img: "margarita.jpg" },
-            { id: 124, nombre: "Petunia colorama", cat: "flores", img: "petunia.jpg" },
-            { id: 125, nombre: "Reina Luisa americana", cat: "flores", img: "reina_luisa.jpg" },
-            { id: 126, nombre: "Reina Luisa doble", cat: "flores", img: "reina_luisa_doble.jpg" },
-            { id: 127, nombre: "Reina Luisa matsumoto", cat: "flores", img: "reina_luisa_mats.jpg" },
-            { id: 128, nombre: "Suspiros", cat: "flores", img: "suspiros.jpg" },
-            { id: 201, nombre: "Alcayota", cat: "legumbres", img: "alcayota.jpg" },
-            { id: 202, nombre: "Arveja de mata", cat: "legumbres", img: "arveja.jpg" },
-            { id: 203, nombre: "Arveja sin hila", cat: "legumbres", img: "arveja_hila.jpg" },
-            { id: 204, nombre: "Arvejón de guía", cat: "legumbres", img: "arvejon_guia.jpg" },
-            { id: 205, nombre: "Arvejón mata", cat: "legumbres", img: "arvejon_mata.jpg" },
-            { id: 206, nombre: "Ballica", cat: "legumbres", img: "ballica.jpg" },
-            { id: 207, nombre: "Cilantro Moggiano", cat: "legumbres", img: "cilantro_mog.jpg" },
-            { id: 208, nombre: "Cilantro santo", cat: "legumbres", img: "cilantro_santo.jpg" },
-            { id: 209, nombre: "Habas agua dulce", cat: "legumbres", img: "habas_agua.jpg" },
-            { id: 210, nombre: "Habas verdes", cat: "legumbres", img: "habas.jpg" },
-            { id: 211, nombre: "Maíz 12 hileras", cat: "legumbres", img: "maiz_12.jpg" },
-            { id: 212, nombre: "Maíz dulce", cat: "legumbres", img: "maiz_dulce.jpg" },
-            { id: 213, nombre: "Poroto araucano", cat: "legumbres", img: "poroto_araucano.jpg" },
-            { id: 214, nombre: "Poroto brío", cat: "legumbres", img: "poroto_brio.jpg" },
-            { id: 215, nombre: "Poroto magnum", cat: "legumbres", img: "poroto_magnum.jpg" },
-            { id: 216, nombre: "Poroto manteca", cat: "legumbres", img: "poroto_manteca.jpg" },
-            { id: 217, nombre: "Poroto pallares", cat: "legumbres", img: "poroto_pallares.jpg" },
-            { id: 218, nombre: "Poroto rubí", cat: "legumbres", img: "poroto_rubi.jpg" },
-            { id: 219, nombre: "Poroto señorita", cat: "legumbres", img: "poroto_senorita.jpg" },
-            { id: 220, nombre: "Poroto sofía", cat: "legumbres", img: "poroto_sofia.jpg" },
-            { id: 301, nombre: "Albahaca Morada", cat: "semillas", img: "albahaca.jpg" },
-            { id: 302, nombre: "Alcaparra", cat: "semillas", img: "alcaparra.jpg" },
-            { id: 303, nombre: "Betarraga", cat: "semillas", img: "betarraga.jpg" },
-            { id: 304, nombre: "Calabaza Mate", cat: "semillas", img: "calabaza.jpg" },
-            { id: 305, nombre: "Ciboulette Fino", cat: "semillas", img: "ciboulette.jpg" },
-            { id: 306, nombre: "Hinojo", cat: "semillas", img: "hinojo.jpg" },
-            { id: 307, nombre: "Lechuga Batavia", cat: "semillas", img: "lechuga_batavia.jpg" },
-            { id: 308, nombre: "Lechuga Crespa Verde", cat: "semillas", img: "lechuga_crespa.jpg" },
-            { id: 309, nombre: "Lechuga Maravilla", cat: "semillas", img: "lechuga_maravilla.jpg" },
-            { id: 310, nombre: "Lechuga Reina", cat: "semillas", img: "lechuga_reina.jpg" },
-            { id: 311, nombre: "Mastuerzo", cat: "semillas", img: "mastuerzo.jpg" },
-            { id: 312, nombre: "Pepino Alaska", cat: "semillas", img: "pepino_alaska.jpg" },
-            { id: 313, nombre: "Pepino Ensalada", cat: "semillas", img: "pepino_ensalada.jpg" },
-            { id: 314, nombre: "Perejil Liso", cat: "semillas", img: "perejil_liso.jpg" },
-            { id: 315, nombre: "Rabanitos", cat: "semillas", img: "rabanitos.jpg" },
-            { id: 316, nombre: "Repollo Morado", cat: "semillas", img: "repollo_morado.jpg" },
-            { id: 317, nombre: "Repollo Verde", cat: "semillas", img: "repollo_verde.jpg" },
-            { id: 318, nombre: "Tomillo Chascudo", cat: "semillas", img: "tomillo.jpg" },
-            { id: 319, nombre: "Zanahoria Redonda", cat: "semillas", img: "zanahoria_red.jpg" },
-            { id: 320, nombre: "Zanahoria", cat: "semillas", img: "zanahoria.jpg" },
-            { id: 321, nombre: "Zapallo Camote", cat: "semillas", img: "zapallo_camote.jpg" },
-            { id: 322, nombre: "Zapallo Halloween", cat: "semillas", img: "zapallo_hallow.jpg" }
+            // Hortalizas
+            { nombre: "Acelga Tallo Naranjo", img: "acelga.jpg" },
+            { nombre: "Achicoria", img: "achicoria.jpg" },
+            { nombre: "Ají Cacho de Cabra", img: "aji_cacho.jpg" },
+            { nombre: "Ají Cristal", img: "aji_cristal.jpg" },
+            { nombre: "Ají Habanero", img: "aji_habanero.jpg" },
+            { nombre: "Ají Jalapeño", img: "aji_jalapeno.jpg" },
+            { nombre: "Amaranto", img: "amaranto.jpg" },
+            { nombre: "Apio", img: "apio.jpg" },
+            { nombre: "Berenjena", img: "berenjena.jpg" },
+            { nombre: "Berro", img: "berro.jpg" },
+            { nombre: "Brócoli", img: "brocoli.jpg" },
+            { nombre: "Cebolla Texas", img: "cebolla.jpg" },
+            { nombre: "Cebolla Morada", img: "cebolla_morada.jpg" },
+            { nombre: "Col China", img: "col_china.jpg" },
+            { nombre: "Coliflor", img: "coliflor.jpg" },
+            { nombre: "Coliflor Romanesco", img: "romanesco.jpg" },
+            { nombre: "Kale Crespo", img: "kale.jpg" },
+            { nombre: "Kale Rizado", img: "kale_rizado.jpg" },
+            { nombre: "Kale Toscano", img: "kale_toscano.jpg" },
+            { nombre: "Lechuga Catalogna", img: "lechuga_cat.jpg" },
+            { nombre: "Lechuga Lollo Rosa", img: "lollo_rosa.jpg" },
+            { nombre: "Lechuga Lunanera", img: "lunanera.jpg" },
+            { nombre: "Melón Calameño", img: "melon_cal.jpg" },
+            { nombre: "Mizuna Roja", img: "mizuna_roja.jpg" },
+            { nombre: "Mostaza", img: "mostaza.jpg" },
+            { nombre: "Nabo", img: "nabo.jpg" },
+            { nombre: "Okra", img: "okra.jpg" },
+            { nombre: "Pak Choi Rojo", img: "pakchoi_rojo.jpg" },
+            { nombre: "Perejil Crespo", img: "perejil.jpg" },
+            { nombre: "Pimentón Rojo", img: "pimenton_rojo.jpg" },
+            { nombre: "Repollo Bruselas", img: "bruselas.jpg" },
+            { nombre: "Rúcula", img: "rucula.jpg" },
+            { nombre: "Sandía Antonia", img: "sandia.jpg" },
+            { nombre: "Tatsoi", img: "tatsoi.jpg" },
+            { nombre: "Tomate Amarillo", img: "tomate_am.jpg" },
+            { nombre: "Tomate Rosado", img: "tomate_rosa.jpg" },
+            { nombre: "Zapallo Butternut", img: "zapallo.jpg" },
+            // Flores
+            { nombre: "Alegría del Hogar", img: "alegria.jpg" },
+            { nombre: "Amapola Doble", img: "amapola.jpg" },
+            { nombre: "Borraja", img: "borraja.jpg" },
+            { nombre: "Calendula", img: "calendula.jpg" },
+            { nombre: "Cartuchos", img: "cartucho.jpg" },
+            { nombre: "Celosia Cresta", img: "celosia_cresta.jpg" },
+            { nombre: "Clavel Gigante", img: "clavel.jpg" },
+            { nombre: "Cosmos Sensación", img: "cosmos.jpg" },
+            { nombre: "Dalia Cactus", img: "dalia_cactus.jpg" },
+            { nombre: "Girasol Amarillo", img: "girasol.jpg" },
+            { nombre: "Manzanilla", img: "manzanilla.jpg" },
+            { nombre: "Petunia Colorama", img: "petunia.jpg" },
+            { nombre: "Suspiros", img: "suspiros.jpg" },
+            // Legumbres y Semillas
+            { nombre: "Alcayota", img: "alcayota.jpg" },
+            { nombre: "Arveja de Mata", img: "arveja.jpg" },
+            { nombre: "Cilantro Moggiano", img: "cilantro_mog.jpg" },
+            { nombre: "Habas Agua Dulce", img: "habas_agua.jpg" },
+            { nombre: "Maíz Dulce", img: "maiz_dulce.jpg" },
+            { nombre: "Poroto Araucano", img: "poroto_araucano.jpg" },
+            { nombre: "Poroto Manteca", img: "poroto_manteca.jpg" },
+            { nombre: "Albahaca Morada", img: "albahaca.jpg" },
+            { nombre: "Betarraga", img: "betarraga.jpg" },
+            { nombre: "Ciboulette Fino", img: "ciboulette.jpg" },
+            { nombre: "Pepino Alaska", img: "pepino_alaska.jpg" },
+            { nombre: "Zanahoria", img: "zanahoria.jpg" }
         ];
 
-        let carrito = [];
-
-        function filtrar(c) {
-            const grid = document.getElementById('grid');
-            grid.innerHTML = '';
-            const lista = (c === 'todos') ? productos : productos.filter(p => p.cat === c);
-            lista.forEach(p => {
-                grid.innerHTML += `
-                    <div class="producto-card">
-                        <img src="${p.img}" onerror="this.src='https://via.placeholder.com/150?text=Sin+Foto'">
-                        <h4>${p.nombre}</h4>
-                        <button class="btn-agregar" onclick="agregar(${p.id})">Agregar</button>
-                    </div>`;
-            });
-        }
-
-        function agregar(id) {
-            const p = productos.find(x => x.id === id);
-            carrito.push(p);
-            document.getElementById('lista-carrito').innerHTML = carrito.map(i => `<div>${i.nombre}</div>`).join('');
-            document.getElementById('total').innerText = carrito.length * 1000;
-        }
-
-        function enviarWhatsApp() {
-            if(carrito.length === 0) return;
-            const msg = "Hola, quiero pedir: " + carrito.map(i => i.nombre).join(", ");
-            window.open("https://wa.me/56966956878?text=" + encodeURIComponent(msg));
-        }
-
-        filtrar('todos');
+        const grid = document.getElementById('grid');
+        productos.forEach(p => {
+            grid.innerHTML += `
+                <div class="producto-card">
+                    <img src="${p.img}" onerror="this.src='https://via.placeholder.com/150?text=Foto+Pendiente'">
+                    <h3>${p.nombre}</h3>
+                    <button onclick="alert('Producto agregado al pedido')">Agregar</button>
+                </div>`;
+        });
     </script>
 </body>
 </html>
