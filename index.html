@@ -11,6 +11,19 @@
         .producto-card { border: 2px solid #2ecc11; padding: 10px; border-radius: 8px; text-align: center; }
         .producto-card img { max-width: 100%; height: 150px; object-fit: cover; }
         .carrito-seccion { flex: 1; border-left: 2px solid #2ecc11; padding-left: 20px; position: sticky; top: 20px; }
+        button {
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.1s;
+}
+
+button:hover {
+    background-color: #2ecc11;
+    color: white;
+}
+
+button:active {
+    transform: scale(0.95); /* Un pequeño "hundimiento" al hacer clic */
+}       
     </style>
 </head>
 <body>
