@@ -193,22 +193,24 @@ button:active {
                     </div>`;
             });
         function agregarAlCarrito(id) {
-    const prod = productos.find(p => p.id === id);
+    const prod = productos.find(p => p.id === id); // Aquí definiste 'prod'
     carrito.push(prod);
     actualizarCarrito();
 
-    // Aquí enviamos el dato a tu Google Sheet (Ciencia de Datos)
+    // Registro de datos para Data Science
     fetch('https://script.google.com/macros/s/AKfycby0iH9I2QxXwwqFXILsDknqVhNTDwvv732R6p12vxIuf0YgQao-i0Ukppp-65VhSQ4t/exec', {
         method: 'POST',
-        mode: 'no-cors', // Muy importante para evitar bloqueos de seguridad
-        headers: {
-            'Content-Type': 'application/json'
-        },
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-            producto: prod.nombre,
-            categoria: prod.categoria,
-            precio: prod.precio
+            producto: prod.nombre,   // Cambia 'producto' por 'prod'
+            categoria: prod.categoria, // Cambia 'producto' por 'prod'
+            precio: prod.precio       // Cambia 'producto' por 'prod'
         })
+    }).then(() => {
+        console.log("¡Dato enviado a la planilla con éxito!");
+    }).catch(error => {
+        console.error("Error al enviar el dato:", error);
     });
 }
 
