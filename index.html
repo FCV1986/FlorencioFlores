@@ -18,9 +18,9 @@
     <div class="catalogo" id="grid"></div>
 
     <script>
+        // He eliminado todas las carpetas. Solo queda el nombre del archivo.
         const productos = [
-            // Hortalizas
-            { nombre: "Acelga Tallo Naranjo", img: "acelga.jpg" },
+            { nombre: "Acelga", img: "acelga.jpg" },
             { nombre: "Achicoria", img: "achicoria.jpg" },
             { nombre: "Ají Cacho de Cabra", img: "aji_cacho.jpg" },
             { nombre: "Ají Cristal", img: "aji_cristal.jpg" },
@@ -31,68 +31,30 @@
             { nombre: "Berenjena", img: "berenjena.jpg" },
             { nombre: "Berro", img: "berro.jpg" },
             { nombre: "Brócoli", img: "brocoli.jpg" },
-            { nombre: "Cebolla Texas", img: "cebolla.jpg" },
-            { nombre: "Cebolla Morada", img: "cebolla_morada.jpg" },
-            { nombre: "Col China", img: "col_china.jpg" },
+            { nombre: "Cebolla", img: "cebolla.jpg" },
             { nombre: "Coliflor", img: "coliflor.jpg" },
-            { nombre: "Coliflor Romanesco", img: "romanesco.jpg" },
-            { nombre: "Kale Crespo", img: "kale.jpg" },
-            { nombre: "Kale Rizado", img: "kale_rizado.jpg" },
-            { nombre: "Kale Toscano", img: "kale_toscano.jpg" },
-            { nombre: "Lechuga Catalogna", img: "lechuga_cat.jpg" },
-            { nombre: "Lechuga Lollo Rosa", img: "lollo_rosa.jpg" },
-            { nombre: "Lechuga Lunanera", img: "lunanera.jpg" },
-            { nombre: "Melón Calameño", img: "melon_cal.jpg" },
-            { nombre: "Mizuna Roja", img: "mizuna_roja.jpg" },
+            { nombre: "Kale", img: "kale.jpg" },
+            { nombre: "Lechuga", img: "lechuga_cat.jpg" },
+            { nombre: "Melón", img: "melon_cal.jpg" },
             { nombre: "Mostaza", img: "mostaza.jpg" },
             { nombre: "Nabo", img: "nabo.jpg" },
             { nombre: "Okra", img: "okra.jpg" },
-            { nombre: "Pak Choi Rojo", img: "pakchoi_rojo.jpg" },
-            { nombre: "Perejil Crespo", img: "perejil.jpg" },
+            { nombre: "Pak Choi", img: "pakchoi_rojo.jpg" },
+            { nombre: "Perejil", img: "perejil.jpg" },
             { nombre: "Pimentón Rojo", img: "pimenton_rojo.jpg" },
-            { nombre: "Repollo Bruselas", img: "bruselas.jpg" },
             { nombre: "Rúcula", img: "rucula.jpg" },
-            { nombre: "Sandía Antonia", img: "sandia.jpg" },
-            { nombre: "Tatsoi", img: "tatsoi.jpg" },
-            { nombre: "Tomate Amarillo", img: "tomate_am.jpg" },
-            { nombre: "Tomate Rosado", img: "tomate_rosa.jpg" },
-            { nombre: "Zapallo Butternut", img: "zapallo.jpg" },
-            // Flores
-            { nombre: "Alegría del Hogar", img: "alegria.jpg" },
-            { nombre: "Amapola Doble", img: "amapola.jpg" },
-            { nombre: "Borraja", img: "borraja.jpg" },
-            { nombre: "Calendula", img: "calendula.jpg" },
-            { nombre: "Cartuchos", img: "cartucho.jpg" },
-            { nombre: "Celosia Cresta", img: "celosia_cresta.jpg" },
-            { nombre: "Clavel Gigante", img: "clavel.jpg" },
-            { nombre: "Cosmos Sensación", img: "cosmos.jpg" },
-            { nombre: "Dalia Cactus", img: "dalia_cactus.jpg" },
-            { nombre: "Girasol Amarillo", img: "girasol.jpg" },
-            { nombre: "Manzanilla", img: "manzanilla.jpg" },
-            { nombre: "Petunia Colorama", img: "petunia.jpg" },
-            { nombre: "Suspiros", img: "suspiros.jpg" },
-            // Legumbres y Semillas
-            { nombre: "Alcayota", img: "alcayota.jpg" },
-            { nombre: "Arveja de Mata", img: "arveja.jpg" },
-            { nombre: "Cilantro Moggiano", img: "cilantro_mog.jpg" },
-            { nombre: "Habas Agua Dulce", img: "habas_agua.jpg" },
-            { nombre: "Maíz Dulce", img: "maiz_dulce.jpg" },
-            { nombre: "Poroto Araucano", img: "poroto_araucano.jpg" },
-            { nombre: "Poroto Manteca", img: "poroto_manteca.jpg" },
-            { nombre: "Albahaca Morada", img: "albahaca.jpg" },
-            { nombre: "Betarraga", img: "betarraga.jpg" },
-            { nombre: "Ciboulette Fino", img: "ciboulette.jpg" },
-            { nombre: "Pepino Alaska", img: "pepino_alaska.jpg" },
-            { nombre: "Zanahoria", img: "zanahoria.jpg" }
+            { nombre: "Sandía", img: "sandia.jpg" },
+            { nombre: "Tomate", img: "tomate_rosa.jpg" },
+            { nombre: "Zapallo", img: "zapallo.jpg" }
         ];
 
         const grid = document.getElementById('grid');
         productos.forEach(p => {
             grid.innerHTML += `
                 <div class="producto-card">
-                    <img src="${p.img}" onerror="this.src='https://via.placeholder.com/150?text=Foto+Pendiente'">
+                    <img src="${p.img}" onerror="this.src='https://via.placeholder.com/150?text=Foto'">
                     <h3>${p.nombre}</h3>
-                    <button onclick="alert('Producto agregado al pedido')">Agregar</button>
+                    <button onclick="alert('Agregado')">Agregar</button>
                 </div>`;
         });
     </script>
