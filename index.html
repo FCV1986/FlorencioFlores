@@ -8,9 +8,8 @@
         .contenedor { display: flex; gap: 20px; }
         .catalogo { flex: 3; display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px; }
         .producto-card { border: 2px solid #2ecc11; padding: 10px; border-radius: 8px; text-align: center; }
-        .producto-card img { max-width: 100%; height: 150px; object-fit: cover; }
         .carrito-seccion { flex: 1; border-left: 2px solid #2ecc11; padding-left: 20px; position: sticky; top: 20px; }
-        button { cursor: pointer; padding: 8px; }
+        button { cursor: pointer; padding: 8px; background: #2ecc11; color: white; border: none; border-radius: 4px; }
     </style>
 </head>
 <body>
@@ -32,7 +31,7 @@
             <div id="items-carrito">El carrito está vacío.</div>
             <hr>
             <h3>Total: $<span id="total-precio">0</span></h3>
-            <button onclick="enviarWhatsApp()" style="background:#25d366; color:white; border:none; width:100%;">Confirmar Pedido</button>
+            <button onclick="enviarWhatsApp()" style="background:#25d366; width:100%;">Confirmar Pedido</button>
         </aside>
     </div>
 
@@ -179,10 +178,11 @@
             carrito.push(prod);
             actualizarCarrito();
 
-            const url = 'https://script.google.com/macros/s/AKfycbyVcwBgbGtXT9CcVvyhLvYleblwIx_W9iE1HLeUSLg-t81rDWX13800uE0DFiP45Ohu/exec';
+            // Pega tu URL de Google Apps Script abajo, dentro de las comillas simples
+            const url = 'https://script.google.com/macros/s/AKfycbyVcwBgbGtXT9CcVvyhLvYleblwIx_W9iE1HLeUSLg-t81rDWX13800uE0DFiP45Ohu/exec'; 
             
             fetch(`${url}?producto=${encodeURIComponent(prod.nombre)}&categoria=${encodeURIComponent(prod.categoria)}&precio=${prod.precio}`, { mode: 'no-cors' })
-            .then(() => console.log("Datos enviados a la planilla"))
+            .then(() => console.log("Enviado a planilla"))
             .catch(e => console.error("Error al enviar", e));
         }
 
