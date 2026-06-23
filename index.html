@@ -18,6 +18,7 @@
     <div class="catalogo" id="grid"></div>
 
     <script>
+        // LISTA DEFINITIVA: Asegúrate de que estos nombres de archivo sean exactos en tu carpeta
         const productos = [
             { nombre: "Acelga", img: "acelga_tallo_naranjo.png" },
             { nombre: "Achicoria", img: "achicoria.jpg" },
@@ -55,7 +56,7 @@
         productos.forEach(p => {
             grid.innerHTML += `
                 <div class="producto-card">
-                    <img src="${p.img}" onerror="this.src='https://via.placeholder.com/150'">
+                    <img src="${p.img}" onerror="this.style.display='none'">
                     <h3>${p.nombre}</h3>
                     <button onclick="alert('Agregado: ${p.nombre}')">Agregar</button>
                 </div>`;
