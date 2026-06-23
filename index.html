@@ -191,27 +191,19 @@ button:active {
                         <h4>${p.nombre}</h4>
                         <button onclick="agregarAlCarrito(${p.id})">Agregar</button>
                     </div>`;
-            });
-        function agregarAlCarrito(id) {
-    const prod = productos.find(p => p.id === id); // Aquí definiste 'prod'
+            function agregarAlCarrito(id) {
+    const prod = productos.find(p => p.id === id);
     carrito.push(prod);
     actualizarCarrito();
 
-    // Registro de datos para Data Science
-    fetch('https://script.google.com/macros/s/AKfycby0iH9I2QxXwwqFXILsDknqVhNTDwvv732R6p12vxIuf0YgQao-i0Ukppp-65VhSQ4t/exec', {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            producto: prod.nombre,   // Cambia 'producto' por 'prod'
-            categoria: prod.categoria, // Cambia 'producto' por 'prod'
-            precio: prod.precio       // Cambia 'producto' por 'prod'
-        })
-    }).then(() => {
-        console.log("¡Dato enviado a la planilla con éxito!");
-    }).catch(error => {
-        console.error("Error al enviar el dato:", error);
-    });
+                
+    // Nueva versión: Envío vía parámetros de URL (más seguro contra bloqueos)
+    let url = 'https://script.google.com/macros/s/AKfycby0iH9I2QxXwwqFXILsDknqVhNTDwvv732R6p12vxIuf0YgQao-i0Ukppp-65VhSQ4t/exec';
+    let fullUrl = url + `?producto=${encodeURIComponent(prod.nombre)}&categoria=${encodeURIComponent(prod.categoria)}&precio=${prod.precio}`;
+
+    fetch(fullUrl, { method: 'GET' })
+    .then(() => console.log("¡Dato enviado exitosamente!"))
+    .catch(error => console.error("Error:", error));
 }
 
         function actualizarCarrito() {
