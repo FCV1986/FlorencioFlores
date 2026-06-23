@@ -51,7 +51,7 @@ const productos = [
     { nombre: "Zapallo It. Bola8", img: "zapallo_italiano_bola8.png" },
     { nombre: "Zapallo It. Gris", img: "zapallo_italiano_gris.jpg" },
     // Flores
-    { nombre: "Alegría", img: "foto_flores/alegria.jpg" },
+    { nombre: "Alegría del hogar", img: "foto_flores/alegria.jpg" },
     { nombre: "Amapola Doble", img: "foto_flores/amapolas_doble.jpg" },
     { nombre: "Borraja", img: "foto_flores/borraja.jpg" },
     { nombre: "Cactus y Suculentas", img: "foto_flores/cactus_y_suculentas.png" },
