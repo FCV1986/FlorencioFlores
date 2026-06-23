@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catálogo Florencio Flores</title>
     <style>
-        body { font-family: sans-serif; max-width: 1000px; margin: 0 auto; padding: 20px; background-color: #f9fff9; }
-        h1 { text-align: center; color: #2ecc11; margin-bottom: 30px; }
-        .catalogo { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; }
+        body { font-family: sans-serif; max-width: 1200px; margin: 0 auto; padding: 20px; background-color: #f9fff9; }
+        h1 { text-align: center; color: #2ecc11; }
+        .catalogo { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; margin-top: 20px; }
         .producto-card { border: 2px solid #2ecc11; padding: 10px; border-radius: 8px; text-align: center; background: white; }
         .producto-card img { width: 100%; height: 150px; object-fit: cover; border-radius: 4px; background: #eee; }
         button { cursor: pointer; padding: 10px; background: #2ecc11; color: white; border: none; border-radius: 4px; width: 100%; margin-top: 10px; }
@@ -19,23 +19,45 @@
 
     <script>
         const productos = [
-            { nombre: "Acelga", img: "acelga.jpg" },
+            { nombre: "Acelga", img: "acelga_tallo_naranjo.png" },
             { nombre: "Achicoria", img: "achicoria.jpg" },
+            { nombre: "Ají Cacho", img: "aji_cacho.jpg" },
+            { nombre: "Ají Cristal", img: "aji_cristal.jpg" },
+            { nombre: "Ají Habanero", img: "aji_habanero.jpg" },
+            { nombre: "Ají Jalapeño", img: "aji_jalapeno.jpg" },
             { nombre: "Amaranto", img: "amaranto.jpg" },
             { nombre: "Apio", img: "apio.jpg" },
+            { nombre: "Berenjena", img: "berenjena.jpg" },
+            { nombre: "Berro", img: "berro.jpg" },
+            { nombre: "Brócoli", img: "brocoli.jpg" },
+            { nombre: "Cebolla", img: "cebolla.jpg" },
+            { nombre: "Coliflor", img: "coliflor.jpg" },
+            { nombre: "Kale", img: "kale.jpg" },
+            { nombre: "Lechuga", img: "lechuga_cat.jpg" },
+            { nombre: "Melón", img: "melon_cal.jpg" },
+            { nombre: "Mostaza", img: "mostaza.jpg" },
+            { nombre: "Nabo", img: "nabo.jpg" },
+            { nombre: "Okra", img: "okra.jpg" },
+            { nombre: "Pak Choi", img: "pakchoi_rojo.jpg" },
+            { nombre: "Perejil", img: "perejil.jpg" },
+            { nombre: "Pimentón Rojo", img: "pimenton_rojo.jpg" },
+            { nombre: "Rúcula", img: "rucula.jpg" },
+            { nombre: "Sandía", img: "sandia.jpg" },
+            { nombre: "Tomate", img: "tomate_rosa.jpg" },
+            { nombre: "Zapallo", img: "zapallo.jpg" },
             { nombre: "Betarraga", img: "betarraga.jpg" },
             { nombre: "Zanahoria", img: "zanahoria.jpg" }
         ];
 
         const grid = document.getElementById('grid');
-        grid.innerHTML = ''; // Esto elimina lo que haya antes para que no se duplique
+        grid.innerHTML = ''; 
         
         productos.forEach(p => {
             grid.innerHTML += `
                 <div class="producto-card">
-                    <img src="${p.img}" onerror="this.src='https://via.placeholder.com/150?text=Sin+Foto'">
+                    <img src="${p.img}" onerror="this.src='https://via.placeholder.com/150'">
                     <h3>${p.nombre}</h3>
-                    <button onclick="alert('Agregado')">Agregar</button>
+                    <button onclick="alert('Agregado: ${p.nombre}')">Agregar</button>
                 </div>`;
         });
     </script>
