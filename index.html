@@ -1,4 +1,43 @@
-<script>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo Florencio Flores</title>
+    <style>
+        body { max-width: 1200px; margin: 0 auto; padding: 20px; font-family: sans-serif; }
+        .contenedor { display: flex; gap: 20px; }
+        .catalogo { flex: 3; display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px; }
+        .producto-card { border: 2px solid #2ecc11; padding: 10px; border-radius: 8px; text-align: center; }
+        .producto-card img { max-width: 100%; height: 150px; object-fit: cover; }
+        .carrito-seccion { flex: 1; border-left: 2px solid #2ecc11; padding-left: 20px; position: sticky; top: 20px; }
+    </style>
+</head>
+<body>
+
+    <header style="text-align:center;">
+        <h1>Florencio Flores</h1>
+        <div id="filtros">
+            <button onclick="mostrarProductos('todos')">Todos</button>
+            <button onclick="mostrarProductos('hortalizas')">Hortalizas</button>
+            <button onclick="mostrarProductos('flores')">Flores</button>
+            <button onclick="mostrarProductos('legumbres')">Legumbres</button>
+            <button onclick="mostrarProductos('semillas')">Semillas</button>
+        </div>
+    </header>
+
+    <div class="contenedor" style="margin-top:20px;">
+        <main class="catalogo" id="grid-productos"></main>
+        <aside class="carrito-seccion">
+            <h2>🛒 Tu Pedido</h2>
+            <div id="items-carrito">El carrito está vacío.</div>
+            <hr>
+            <h3>Total: $<span id="total-precio">0</span></h3>
+            <button onclick="enviarWhatsApp()" style="background:#25d366; color:white; border:none; padding:10px; cursor:pointer;">Confirmar Pedido</button>
+        </aside>
+    </div>
+
+    <script>
         const productos = [
             // Hortalizas
             { id: 1, nombre: "Acelga Tallo Naranjo", categoria: "hortalizas", precio: 1000, imagen: "fotos_hortalizas/acelga_tallo_naranjo.png" },
@@ -101,7 +140,7 @@
             { id: 218, nombre: "Poroto rubí", categoria: "legumbres", precio: 1000, imagen: "foto_porotos/poroto_rubi.jpg" },
             { id: 219, nombre: "Poroto señorita", categoria: "legumbres", precio: 1000, imagen: "foto_porotos/poroto_senorita.jpg" },
             { id: 220, nombre: "Poroto sofía", categoria: "legumbres", precio: 1000, imagen: "foto_porotos/poroto_sofia.jpg" },
-            // Bolsas de semillas
+            // Semillas
             { id: 301, nombre: "Albahaca Morada", categoria: "semillas", precio: 1000, imagen: "foto_bolsas_con_semillas_de_hortalizas/albahaca-morada.jpg" },
             { id: 302, nombre: "Alcaparra", categoria: "semillas", precio: 1000, imagen: "foto_bolsas_con_semillas_de_hortalizas/alcaparra.webp" },
             { id: 303, nombre: "Betarraga", categoria: "semillas", precio: 1000, imagen: "foto_bolsas_con_semillas_de_hortalizas/betarraga.webp" },
@@ -127,61 +166,39 @@
         ];
 
         let carrito = [];
-        const WHATSAPP_DANIELA = "56966956878";
 
-        function mostrarProductos(lista) {
+        function mostrarProductos(cat) {
             const grid = document.getElementById('grid-productos');
             grid.innerHTML = '';
+            const lista = (cat === 'todos') ? productos : productos.filter(p => p.categoria === cat);
             lista.forEach(p => {
                 grid.innerHTML += `
                     <div class="producto-card">
                         <img src="${p.imagen}" alt="${p.nombre}" onerror="this.src='https://cdn-icons-png.flaticon.com/512/628/628283.png'">
                         <h4>${p.nombre}</h4>
-                        <p><strong>$${p.precio.toLocaleString('es-CL')}</strong></p>
                         <button onclick="agregarAlCarrito(${p.id})">Agregar</button>
-                    </div>
-                `;
+                    </div>`;
             });
         }
 
         function agregarAlCarrito(id) {
-            const producto = productos.find(p => p.id === id);
-            const existe = carrito.find(item => item.id === id);
-            if (existe) existe.cantidad++;
-            else carrito.push({ ...producto, cantidad: 1 });
+            const prod = productos.find(p => p.id === id);
+            carrito.push(prod);
             actualizarCarrito();
         }
 
         function actualizarCarrito() {
-            const contenedorHTML = document.getElementById('items-carrito');
-            const totalHTML = document.getElementById('total-precio');
-            if (carrito.length === 0) {
-                contenedorHTML.innerHTML = '<p>El carrito está vacío.</p>';
-                totalHTML.innerText = '0';
-                return;
-            }
-            contenedorHTML.innerHTML = '';
-            let total = 0;
-            carrito.forEach(item => {
-                total += item.precio * item.cantidad;
-                contenedorHTML.innerHTML += `
-                    <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
-                        <span>${item.nombre} (x${item.cantidad})</span>
-                        <button onclick="carrito = carrito.filter(i => i.id !== ${item.id}); actualizarCarrito();">X</button>
-                    </div>
-                `;
-            });
-            totalHTML.innerText = total.toLocaleString('es-CL');
+            const cont = document.getElementById('items-carrito');
+            cont.innerHTML = carrito.map(i => `<div>${i.nombre}</div>`).join('');
+            document.getElementById('total-precio').innerText = (carrito.length * 1000);
         }
 
         function enviarWhatsApp() {
-            if (carrito.length === 0) return alert("Carrito vacío");
-            let mensaje = "Hola Daniela, quiero: ";
-            carrito.forEach(i => mensaje += `${i.nombre} (x${i.cantidad}), `);
-            window.open(`https://wa.me/${WHATSAPP_DANIELA}?text=${encodeURIComponent(mensaje)}`, '_blank');
+            let msg = "Hola, quiero: " + carrito.map(i => i.nombre).join(", ");
+            window.open("https://wa.me/56966956878?text=" + encodeURIComponent(msg));
         }
 
-        mostrarProductos(productos);
+        window.onload = () => mostrarProductos('todos');
     </script>
 </body>
 </html>
