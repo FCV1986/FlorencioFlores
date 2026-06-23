@@ -6,6 +6,66 @@
     <title>Catálogo Florencio Flores</title>
     <style>
         body { font-family: sans-serif; max-width: 1200px; margin: 0 auto; padding: 20px; background-color: #f9fff9; }
+        h1 { text-align: center; color: #2ecc11; margin-bottom: 30px; }
+        .catalogo { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; }
+        .producto-card { border: 2px solid #2ecc11; padding: 10px; border-radius: 8px; text-align: center; background: white; }
+        .producto-card img { width: 100%; height: 150px; object-fit: cover; border-radius: 4px; background: #eee; }
+        button { cursor: pointer; padding: 10px; background: #2ecc11; color: white; border: none; border-radius: 4px; width: 100%; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <h1>Florencio Flores</h1>
+    <div class="catalogo" id="grid"></div>
+
+    <script>
+        const productos = [
+            { nombre: "Acelga", img: "acelga_tallo_naranjo.png" },
+            { nombre: "Achicoria", img: "achicoria.jpg" },
+            { nombre: "Ají Cacho", img: "aji_cacho.jpg" },
+            { nombre: "Ají Cristal", img: "aji_cristal.jpeg" },
+            { nombre: "Ají Habanero", img: "aji_habanero.png" },
+            { nombre: "Amaranto", img: "amaranto.jpg" },
+            { nombre: "Apio", img: "apio.jpg" },
+            { nombre: "Berro", img: "berro.jpg" },
+            { nombre: "Brócoli", img: "brocoli.jpg" },
+            { nombre: "Cebolla Morada", img: "cebolla_morada.jpg" },
+            { nombre: "Coliflor", img: "coliflor.jpg" },
+            { nombre: "Kale", img: "kale_crespo.png" },
+            { nombre: "Lechuga", img: "lechuga_lollo_rosa.png" },
+            { nombre: "Melón Calameño", img: "melon_calameno.jpg" },
+            { nombre: "Mostaza", img: "mostaza.png" },
+            { nombre: "Nabo", img: "nabo.jpg" },
+            { nombre: "Okra", img: "okra.jpg" },
+            { nombre: "Pak Choi", img: "pak_choi_rojo.png" },
+            { nombre: "Perejil", img: "perejil_crespo.jpg" },
+            { nombre: "Pimentón Rojo", img: "pimenton_rojo.jpg" },
+            { nombre: "Rúcula", img: "rucula.jpg" },
+            { nombre: "Sandía", img: "sandia_antonia.png" },
+            { nombre: "Tomate Rosado", img: "tomate_rosado.jpg" },
+            { nombre: "Zapallo", img: "zapallo_butternut.png" }
+        ];
+
+        const grid = document.getElementById('grid');
+        grid.innerHTML = ''; 
+        
+        productos.forEach(p => {
+            grid.innerHTML += `
+                <div class="producto-card">
+                    <img src="${p.img}" onerror="this.style.display='none'">
+                    <h3>${p.nombre}</h3>
+                    <button onclick="alert('Agregado: ${p.nombre}')">Agregar</button>
+                </div>`;
+        });
+    </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo Florencio Flores</title>
+    <style>
+        body { font-family: sans-serif; max-width: 1200px; margin: 0 auto; padding: 20px; background-color: #f9fff9; }
         h1 { text-align: center; color: #2ecc11; }
         .catalogo { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px; margin-top: 20px; }
         .producto-card { border: 2px solid #2ecc11; padding: 10px; border-radius: 8px; text-align: center; background: white; }
