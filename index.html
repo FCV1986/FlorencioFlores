@@ -10,29 +10,28 @@
         .catalogo { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 15px; }
         .card { border: 1px solid #2ecc11; padding: 10px; border-radius: 8px; text-align: center; }
         .card img { width: 100%; height: 100px; object-fit: cover; }
-        #carrito { margin-top: 40px; border-top: 2px solid #ccc; padding-top: 20px; }
+        #carrito { border: 1px solid #ccc; padding: 20px; margin-bottom: 30px; }
+        .btn-activo { background-color: #2ecc11 !important; color: white; border-radius: 5px; }
     </style>
 </head>
 <body>
 
     <div class="logo"><img src="logo.jpg" alt="Logo Florencio Flores" style="max-width: 200px;"></div>
 
+    <div id="carrito">
+        <h2>Tu Pedido 🛒</h2>
+        <ul id="lista-pedido"><li>El carrito está vacío.</li></ul>
+    </div>
+
     <div class="filtros">
-        <button onclick="filtrar('todos')">Todos</button>
-        <button onclick="filtrar('hortalizas')">Hortalizas</button>
-        <button onclick="filtrar('flores')">Flores</button>
-        <button onclick="filtrar('legumbres')">Legumbres y varios</button>
-        <button onclick="filtrar('bolsas')">Semillas en Bolsa</button>
+        <button onclick="filtrar('todos', this)">Todos</button>
+        <button onclick="filtrar('hortalizas', this)">Hortalizas</button>
+        <button onclick="filtrar('flores', this)">Flores</button>
+        <button onclick="filtrar('legumbres', this)">Legumbres y varios</button>
+        <button onclick="filtrar('bolsas', this)">Semillas en Bolsa</button>
     </div>
 
     <div class="catalogo" id="grid"></div>
-
-    <div id="carrito" style="border: 1px solid #ccc; padding: 20px; margin-top: 30px;">
-    <h2>Tu Pedido 🛒</h2>
-    <ul id="lista-pedido">
-        <li>El carrito está vacío.</li>
-    </ul>
-</div>
 
     <script src="products.js"></script>
     <script>
@@ -48,18 +47,19 @@
             });
         }
 
-        function filtrar(cat) {
-            if (cat === 'todos') {
-                render(productos);
+        function filtrar(cat, btn) {
+            // Poner el botón verde
+            document.querySelectorAll('.filtros button').forEach(b => b.classList.remove('btn-activo'));
+            if(btn) btn.classList.add('btn-activo');
+
+            // Filtrar
+            const grid = document.getElementById('grid');
+            const lista = (cat === 'todos') ? productos : productos.filter(p => p.categoria === cat);
+            
+            if (lista.length === 0) {
+                grid.innerHTML = '<p>No hay productos en esta categoría.</p>';
             } else {
-                // Aquí el filtro busca la categoría exacta
-                const listaFiltrada = productos.filter(p => p.categoria === cat);
-                
-                if (listaFiltrada.length === 0) {
-                    document.getElementById('grid').innerHTML = '<p>No hay productos en esta categoría.</p>';
-                } else {
-                    render(listaFiltrada);
-                }
+                render(lista);
             }
         }
 
