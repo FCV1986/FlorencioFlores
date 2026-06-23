@@ -21,7 +21,7 @@
         <button onclick="filtrar('todos')">Todos</button>
         <button onclick="filtrar('hortalizas')">Hortalizas</button>
         <button onclick="filtrar('flores')">Flores</button>
-        <button onclick="filtrar('porotos')">Legumbres y varios</button>
+        <button onclick="filtrar('legumbres')">Legumbres y varios</button>
         <button onclick="filtrar('bolsas')">Semillas en Bolsa</button>
     </div>
 
@@ -48,17 +48,22 @@
             });
         }
 
-        // --- ESTA ES LA PARTE QUE TE FALTA ---
         function filtrar(cat) {
-            if(cat === 'todos') {
+            if (cat === 'todos') {
                 render(productos);
             } else {
-                const filtrados = productos.filter(p => p.categoria === cat);
-                render(filtrados);
+                // Aquí el filtro busca la categoría exacta
+                const listaFiltrada = productos.filter(p => p.categoria === cat);
+                
+                if (listaFiltrada.length === 0) {
+                    document.getElementById('grid').innerHTML = '<p>No hay productos en esta categoría.</p>';
+                } else {
+                    render(listaFiltrada);
+                }
             }
         }
 
-        // Carga inicial para que no aparezca vacío al abrir
+        // Carga inicial
         render(productos);
     </script>
 </body>
