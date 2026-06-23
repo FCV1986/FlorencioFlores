@@ -192,13 +192,25 @@ button:active {
                         <button onclick="agregarAlCarrito(${p.id})">Agregar</button>
                     </div>`;
             });
-        }
-
         function agregarAlCarrito(id) {
-            const prod = productos.find(p => p.id === id);
-            carrito.push(prod);
-            actualizarCarrito();
-        }
+    const prod = productos.find(p => p.id === id);
+    carrito.push(prod);
+    actualizarCarrito();
+
+    // Aquí enviamos el dato a tu Google Sheet (Ciencia de Datos)
+    fetch('https://script.google.com/macros/s/AKfycby0iH9I2QxXwwqFXILsDknqVhNTDwvv732R6p12vxIuf0YgQao-i0Ukppp-65VhSQ4t/exec', {
+        method: 'POST',
+        mode: 'no-cors', // Muy importante para evitar bloqueos de seguridad
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            producto: prod.nombre,
+            categoria: prod.categoria,
+            precio: prod.precio
+        })
+    });
+}
 
         function actualizarCarrito() {
             const cont = document.getElementById('items-carrito');
