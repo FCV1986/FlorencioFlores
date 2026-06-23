@@ -191,20 +191,27 @@ button:active {
                         <h4>${p.nombre}</h4>
                         <button onclick="agregarAlCarrito(${p.id})">Agregar</button>
                     </div>`;
-            function agregarAlCarrito(id) {
-    const prod = productos.find(p => p.id === id);
-    carrito.push(prod);
-    actualizarCarrito();
-
                 
-    // Nueva versión: Envío vía parámetros de URL (más seguro contra bloqueos)
-    let url = 'https://script.google.com/macros/s/AKfycby0iH9I2QxXwwqFXILsDknqVhNTDwvv732R6p12vxIuf0YgQao-i0Ukppp-65VhSQ4t/exec';
-    let fullUrl = url + `?producto=${encodeURIComponent(prod.nombre)}&categoria=${encodeURIComponent(prod.categoria)}&precio=${prod.precio}`;
-
-    fetch(fullUrl, { method: 'GET' })
-    .then(() => console.log("¡Dato enviado exitosamente!"))
-    .catch(error => console.error("Error:", error));
-}
+                    function agregarAlCarrito(id) {
+            const prod = productos.find(p => p.id === id);
+            carrito.push(prod);
+            actualizarCarrito();
+        
+            // Nueva URL de tu Apps Script
+            let url = 'https://script.google.com/macros/s/AKfycbzBVUR-LlhdxNlqhf-QSZePnliYLTdNQc4NjCcY8xB8cTLCL6DS62D1N_PWnU8_c2Ut/exec';
+            
+            // Construimos la URL con los datos
+            let fullUrl = url + `?producto=${encodeURIComponent(prod.nombre)}&categoria=${encodeURIComponent(prod.categoria)}&precio=${prod.precio}`;
+        
+            // Enviamos el dato
+            fetch(fullUrl, { method: 'GET' })
+            .then(response => {
+                console.log("¡Dato enviado a tu planilla!");
+            })
+            .catch(error => {
+                console.error("Error al enviar el dato:", error);
+            });
+        }
 
         function actualizarCarrito() {
             const cont = document.getElementById('items-carrito');
