@@ -22,7 +22,7 @@
         <h2>Tu Pedido 🛒</h2>
         <ul id="lista-pedido"><li>El carrito está vacío.</li></ul>
         <button onclick="enviarWhatsApp()">Enviar Pedido por WhatsApp 📲</button>
-        <button onclick="descargarCSV()">Descargar Base de Datos (CSV) 📊</button>
+        <button id="btn-admin" onclick="descargarCSV()" style="display: none;">Descargar Base de Datos (CSV) 📊</button>
     </div>
 
     <div class="filtros">
@@ -98,6 +98,14 @@
         }
 
         render(productos);
+
+        // Detectar si el administrador accede a la página con un parámetro secreto
+window.onload = function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('modo') === 'admin') {
+        document.getElementById('btn-admin').style.display = 'block';
+    }
+};
     </script>
 </body>
 </html>
