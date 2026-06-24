@@ -35,6 +35,9 @@
 
     <script src="products.js"></script>
     <script>
+        // Array para guardar los productos seleccionados
+        let carrito = [];
+
         function render(lista) {
             const grid = document.getElementById('grid');
             grid.innerHTML = '';
@@ -42,17 +45,30 @@
                 grid.innerHTML += `<div class="card">
                     <img src="${p.img}" onerror="this.style.display='none'">
                     <h3>${p.nombre}</h3>
-                    <button>Agregar</button>
+                    <button onclick="agregarAlCarrito('${p.nombre}')">Agregar</button>
                 </div>`;
             });
         }
 
+        function agregarAlCarrito(nombre) {
+            carrito.push(nombre);
+            const listaPedido = document.getElementById('lista-pedido');
+            
+            // Si es el primer producto, limpiamos el "está vacío"
+            if (carrito.length === 1) listaPedido.innerHTML = '';
+            
+            // Añadimos el nuevo producto a la lista
+            const li = document.createElement('li');
+            li.textContent = nombre;
+            listaPedido.appendChild(li);
+            
+            alert(nombre + " agregado al pedido.");
+        }
+
         function filtrar(cat, btn) {
-            // Poner el botón verde
             document.querySelectorAll('.filtros button').forEach(b => b.classList.remove('btn-activo'));
             if(btn) btn.classList.add('btn-activo');
 
-            // Filtrar
             const grid = document.getElementById('grid');
             const lista = (cat === 'todos') ? productos : productos.filter(p => p.categoria === cat);
             
@@ -63,7 +79,6 @@
             }
         }
 
-        // Carga inicial
         render(productos);
     </script>
 </body>
