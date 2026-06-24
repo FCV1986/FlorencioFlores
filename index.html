@@ -21,6 +21,8 @@
     <div id="carrito">
         <h2>Tu Pedido 🛒</h2>
         <ul id="lista-pedido"><li>El carrito está vacío.</li></ul>
+        <button onclick="enviarWhatsApp()">Enviar Pedido por WhatsApp 📲</button>
+        <button onclick="descargarCSV()">Descargar Base de Datos (CSV) 📊</button>
     </div>
 
     <div class="filtros">
@@ -35,7 +37,6 @@
 
     <script src="products.js"></script>
     <script>
-        // Array para guardar los productos seleccionados
         let carrito = [];
 
         function render(lista) {
@@ -53,30 +54,47 @@
         function agregarAlCarrito(nombre) {
             carrito.push(nombre);
             const listaPedido = document.getElementById('lista-pedido');
-            
-            // Si es el primer producto, limpiamos el "está vacío"
             if (carrito.length === 1) listaPedido.innerHTML = '';
-            
-            // Añadimos el nuevo producto a la lista
             const li = document.createElement('li');
             li.textContent = nombre;
             listaPedido.appendChild(li);
-            
             alert(nombre + " agregado al pedido.");
         }
 
         function filtrar(cat, btn) {
             document.querySelectorAll('.filtros button').forEach(b => b.classList.remove('btn-activo'));
             if(btn) btn.classList.add('btn-activo');
-
             const grid = document.getElementById('grid');
             const lista = (cat === 'todos') ? productos : productos.filter(p => p.categoria === cat);
-            
             if (lista.length === 0) {
                 grid.innerHTML = '<p>No hay productos en esta categoría.</p>';
             } else {
                 render(lista);
             }
+        }
+
+        // --- Nuevas funciones para WhatsApp y Ciencia de Datos ---
+
+        function enviarWhatsApp() {
+            if (carrito.length === 0) return alert("El carrito está vacío");
+            let mensaje = "Hola Daniela, quiero pedir: " + carrito.join(", ");
+            let url = "https://wa.me/56966956878?text=" + encodeURIComponent(mensaje);
+            window.open(url, '_blank');
+        }
+
+        function descargarCSV() {
+            if (carrito.length === 0) return alert("No hay datos para exportar");
+            let csvContent = "data:text/csv;charset=utf-8,Fecha,Producto\n";
+            let fechaActual = new Date().toISOString().split('T')[0];
+            carrito.forEach(item => {
+                csvContent += fechaActual + "," + item + "\n";
+            });
+            let encodedUri = encodeURI(csvContent);
+            let link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "base_de_datos_pedidos.csv");
+            document.body.appendChild(link);
+            link.click();
         }
 
         render(productos);
