@@ -21,10 +21,7 @@
     <div id="carrito">
         <h2>Tu Pedido 🛒</h2>
         <ul id="lista-pedido"><li>El carrito está vacío.</li></ul>
-        <button onclick="enviarWhatsApp()">Enviar Pedido por WhatsApp 📲</button>
-        <button onclick="enviarFormulario()" style="background-color: #673ab7; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer;">
-            Enviar Pedido a Base de Datos 📊
-        </button>
+        <button onclick="procesarPedido()">Enviar Pedido 📲</button>
         <button id="btn-admin" onclick="descargarCSV()" style="display: none;">Descargar Base de Datos (CSV) 📊</button>
     </div>
 
@@ -71,25 +68,27 @@
             render(lista);
         }
 
-        function enviarWhatsApp() {
+        // --- FUNCIÓN UNIFICADA ---
+        function procesarPedido() {
             if (carrito.length === 0) return alert("El carrito está vacío");
+            
+            // 1. Envío invisible a Google Forms
+            enviarAFormulario();
+
+            // 2. Envío a WhatsApp
             let mensaje = "Hola Daniela, quiero pedir: " + carrito.join(", ");
             let url = "https://wa.me/56966956878?text=" + encodeURIComponent(mensaje);
             window.open(url, '_blank');
         }
 
-        // --- FUNCIÓN PARA ENVIAR A GOOGLE FORMS ---
-        function enviarFormulario() {
-            if (carrito.length === 0) return alert("El carrito está vacío");
-            
-            // URL de tu formulario (convertida a formResponse)
+        function enviarAFormulario() {
             const urlForm = "https://docs.google.com/forms/d/e/1FAIpQLSeyXt-AbSoD2maRvr-_sY-yUDqQAEbEycalS9cHWJzbweqJ1A/formResponse";
-            const idCampo = "entry.1523483259"; // ID de tu campo "Detalle del Pedido"
+            const idCampo = "entry.1523483259";
 
             let form = document.createElement("form");
             form.action = urlForm;
             form.method = "POST";
-            form.target = "_blank"; // Abre en nueva pestaña para no cerrar tu catálogo
+            form.style.display = "none"; // Invisible
 
             let input = document.createElement("input");
             input.name = idCampo;
@@ -99,8 +98,6 @@
             document.body.appendChild(form);
             form.submit();
             document.body.removeChild(form);
-            
-            alert("Pedido enviado a la base de datos.");
         }
 
         function descargarCSV() {
