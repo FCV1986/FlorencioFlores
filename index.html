@@ -68,12 +68,12 @@
             render(lista);
         }
 
-        // --- FUNCIÓN UNIFICADA ---
+        // --- FUNCIÓN UNIFICADA Y MODERNA ---
         function procesarPedido() {
             if (carrito.length === 0) return alert("El carrito está vacío");
             
-            // 1. Envío invisible a Google Forms
-            enviarAFormulario();
+            // 1. Envío asíncrono a tu API de Google
+            enviarAPlanilla();
 
             // 2. Envío a WhatsApp
             let mensaje = "Hola Daniela, quiero pedir: " + carrito.join(", ");
@@ -81,23 +81,17 @@
             window.open(url, '_blank');
         }
 
-        function enviarAFormulario() {
-            const urlForm = "https://docs.google.com/forms/d/e/1FAIpQLSeyXt-AbSoD2maRvr-_sY-yUDqQAEbEycalS9cHWJzbweqJ1A/formResponse";
-            const idCampo = "entry.1523483259";
+        function enviarAPlanilla() {
+            const urlAPI = "https://script.google.com/macros/s/AKfycbyN6-lPGPq8dTEcFc4FeHyUJbZRu2Ow5iQ4L9X5T9D1nI1-ujfRFJearCv-VMEjHQvFPA/exec";
 
-            let form = document.createElement("form");
-            form.action = urlForm;
-            form.method = "POST";
-            form.style.display = "none"; // Invisible
-
-            let input = document.createElement("input");
-            input.name = idCampo;
-            input.value = carrito.join(", ");
-            
-            form.appendChild(input);
-            document.body.appendChild(form);
-            form.submit();
-            document.body.removeChild(form);
+            fetch(urlAPI, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: 'pedido=' + encodeURIComponent(carrito.join(", "))
+            })
+            .then(() => console.log("Pedido registrado en planilla."))
+            .catch(error => console.error('Error:', error));
         }
 
         function descargarCSV() {
