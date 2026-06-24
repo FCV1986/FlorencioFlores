@@ -22,6 +22,9 @@
         <h2>Tu Pedido 🛒</h2>
         <ul id="lista-pedido"><li>El carrito está vacío.</li></ul>
         <button onclick="enviarWhatsApp()">Enviar Pedido por WhatsApp 📲</button>
+        <button onclick="enviarFormulario()" style="background-color: #673ab7; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer;">
+            Enviar Pedido a Base de Datos 📊
+        </button>
         <button id="btn-admin" onclick="descargarCSV()" style="display: none;">Descargar Base de Datos (CSV) 📊</button>
     </div>
 
@@ -58,7 +61,6 @@
             const li = document.createElement('li');
             li.textContent = nombre;
             listaPedido.appendChild(li);
-            alert(nombre + " agregado al pedido.");
         }
 
         function filtrar(cat, btn) {
@@ -66,20 +68,39 @@
             if(btn) btn.classList.add('btn-activo');
             const grid = document.getElementById('grid');
             const lista = (cat === 'todos') ? productos : productos.filter(p => p.categoria === cat);
-            if (lista.length === 0) {
-                grid.innerHTML = '<p>No hay productos en esta categoría.</p>';
-            } else {
-                render(lista);
-            }
+            render(lista);
         }
-
-        // --- Nuevas funciones para WhatsApp y Ciencia de Datos ---
 
         function enviarWhatsApp() {
             if (carrito.length === 0) return alert("El carrito está vacío");
             let mensaje = "Hola Daniela, quiero pedir: " + carrito.join(", ");
             let url = "https://wa.me/56966956878?text=" + encodeURIComponent(mensaje);
             window.open(url, '_blank');
+        }
+
+        // --- FUNCIÓN PARA ENVIAR A GOOGLE FORMS ---
+        function enviarFormulario() {
+            if (carrito.length === 0) return alert("El carrito está vacío");
+            
+            // URL de tu formulario (convertida a formResponse)
+            const urlForm = "https://docs.google.com/forms/d/e/1FAIpQLSeyXt-AbSoD2maRvr-_sY-yUDqQAEbEycalS9cHWJzbweqJ1A/formResponse";
+            const idCampo = "entry.1523483259"; // ID de tu campo "Detalle del Pedido"
+
+            let form = document.createElement("form");
+            form.action = urlForm;
+            form.method = "POST";
+            form.target = "_blank"; // Abre en nueva pestaña para no cerrar tu catálogo
+
+            let input = document.createElement("input");
+            input.name = idCampo;
+            input.value = carrito.join(", ");
+            
+            form.appendChild(input);
+            document.body.appendChild(form);
+            form.submit();
+            document.body.removeChild(form);
+            
+            alert("Pedido enviado a la base de datos.");
         }
 
         function descargarCSV() {
@@ -99,13 +120,12 @@
 
         render(productos);
 
-        // Detectar si el administrador accede a la página con un parámetro secreto
-window.onload = function() {
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('modo') === 'admin') {
-        document.getElementById('btn-admin').style.display = 'block';
-    }
-};
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('modo') === 'admin') {
+                document.getElementById('btn-admin').style.display = 'block';
+            }
+        };
     </script>
 </body>
 </html>
