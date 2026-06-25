@@ -100,6 +100,7 @@ const productos = [
     { nombre: "Poroto Señorita", img: "foto_porotos/poroto_senorita.jpg", categoria: "Legumbres y varios" },
     { nombre: "Poroto Sofía", img: "foto_porotos/poroto_sofia.jpg", categoria: "Legumbres y varios" },
     // Semillas en Bolsa
+    { nombre: "Acelga mix", img: "foto_bolsas_con_semillas_de_hortalizas/acelga_mix.jpg", categoria: "bolsas" },
     { nombre: "Albahaca Morada", img: "foto_bolsas_con_semillas_de_hortalizas/albahaca-morada.jpg", categoria: "bolsas" },
     { nombre: "Alcaparra", img: "foto_bolsas_con_semillas_de_hortalizas/alcaparra.webp", categoria: "bolsas" },
     { nombre: "Betarraga", img: "foto_bolsas_con_semillas_de_hortalizas/betarraga.webp", categoria: "bolsas" },
