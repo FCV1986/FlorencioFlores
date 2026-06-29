@@ -109,6 +109,7 @@ const productos = [
     { nombre: "Hinojo", img: "foto_bolsas_con_semillas_de_hortalizas/hinojo.jpg", categoria: "bolsas" },
     { nombre: "Lechuga Batavia", img: "foto_bolsas_con_semillas_de_hortalizas/lechuga_batavia.png", categoria: "bolsas" },
     { nombre: "Lechuga Crespa", img: "foto_bolsas_con_semillas_de_hortalizas/lechuga_crespa_verde.jpg", categoria: "bolsas" },
+    { nombre: "Lechuga Gallega de verano", img: "foto_bolsas_con_semillas_de_hortalizas/lechuga_gallega_de_verano.png", categoria: "bolsas" },
     { nombre: "Lechuga Maravilla", img: "foto_bolsas_con_semillas_de_hortalizas/lechuga_maravilla_de_verano.jpg", categoria: "bolsas" },
     { nombre: "Lechuga Reina Mayo", img: "foto_bolsas_con_semillas_de_hortalizas/lechuga_reina_de_mayo.jpg", categoria: "bolsas" },
     { nombre: "Mastuerzo", img: "foto_bolsas_con_semillas_de_hortalizas/mastuerzo.jpg", categoria: "bolsas" },
